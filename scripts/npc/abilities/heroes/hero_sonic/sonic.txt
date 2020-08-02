@@ -212,6 +212,35 @@
 		}
 	}
 
+	"sonic_scream_meow"
+	{
+		"BaseClass"             		"ability_lua"
+		"ScriptFile"					"lua_abilities/lua_abilities.lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityTextureName"			"ability_name"
+
+		"AbilityCooldown"				"32.0 28.0 24.0 20.0"
+		"AbilityManaCost"				"120 100 80 60"
+		"AbilityDamage"					"75 130 200"		
+
+		"AbilityCastPoint"				"1.8"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
+
+		"MaxLevel" 						"4"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"duration"		"1.5 2.0 2.5 3.0"
+			}
+		}
+	}
+
 
 	//=================================================================================================================
 	// Ability: Special Bonus

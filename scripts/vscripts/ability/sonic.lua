@@ -65,7 +65,7 @@ function modifier_sonic_super_speed:GetEffectAttachType()
 end
 
 --
--- Current Ability: Sonic Time Deceleration
+-- Current Ability: Sonic Time Deceleration(Not using)
 --------
 
 sonic_time_deceleration = sonic_time_deceleration or class({})
@@ -292,4 +292,31 @@ end
 
 function modifier_form_change:GetEffectName()
 	return "particles/units/heroes/hero_bloodseeker/bloodseeker_rupture.vpcf"
+end
+
+sonic_scream_meow = sonic_scream_meow or class({})
+
+function sonic_scream_meow:OnAbilityPhaseStart()
+	EmitSoundOn(self:GetCaster(), "Hero_Sonic.Meow")
+	return true
+end
+
+function sonic_scream_meow:OnAbilityPhaseInterrupted()
+	self:GetCaster():StopSound("Hero_Sonic.Meow")
+end
+
+function sonic_scream_meow:OnSpellStart()
+	local target = self:GetCursorTarget()
+	local caster = self:GetCaster()
+
+	local damage_table = {
+		victim = target,
+		attacker = caster,
+		ability = self,
+		damage = self:GetAbilityDamage(),
+		damage_type = self:GetAbilityDamageType()
+	}
+
+	ApplyDamage( damage_table )
+	ApplyFearCustomModifier( caster, target, self, self:GetSpecialValueFor("duration") )
 end

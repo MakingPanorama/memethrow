@@ -1,0 +1,354 @@
+"DOTAAbilities"
+{
+	"Version"		"1"
+	//====================================================================================================================================================================================================================================================================================
+	// JABA==========================================================================================================================================
+	//====================================================================================================================================================================================================================================================================================
+		"beastmaster_boar_poison"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"					"5171"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilityTextureName"			"naruto5"
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"attack_speed"			"30"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movement_speed"		"30"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"3.0"
+			}
+		}
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
+	}
+	"morphling_waveform"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"					"5052"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"FightRecapLevel"				"1"
+		"AbilitySound"					"Hero_Morphling.Waveform"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"2000"
+		"AbilityCastPoint"				"0.25"
+ 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"10"
+
+		// Damage.
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityDamage"					"500"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"30"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed"					"1250"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"width"					"200"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"charge_restore_time"	"11"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"abilitycastrange"		"2000"
+				"LinkedSpecialBonus"	"special_bonus_unique_morphling_1"
+			}
+			
+		}
+	}
+		"mirana_leap"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"					"5050"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilitySound"					"Ability.Leap"
+		"AbilityTextureName"			"naruto7"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0"
+		"AbilityCharges"				"3"
+		"AbilityChargeRestoreTime"		"10"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"40"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"leap_distance"			"1000"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"leap_speed"			"1300.0"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"leap_acceleration"		"6000.0"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"leap_speedbonus"	"8 16 24 32"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"leap_speedbonus_as"	"25 50 75 100"
+				"LinkedSpecialBonus"	"special_bonus_unique_mirana_1"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"leap_bonus_duration"	"2.5"
+			}
+		}
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_3"
+	}
+
+	//Default item remove
+	
+	"item_force_staff"  				"REMOVE"
+	"item_recipe_force_staff"			"REMOVE"
+	"item_heavens_halberd"				"REMOVE"
+	"item_buckler"					"REMOVE"
+	"item_power_treads"				"REMOVE"
+	"item_recipe_power_treads"			"REMOVE"
+	"item_tango"					"REMOVE"
+	"item_recipe_hurricane_pike"			"REMOVE"
+	"item_hurricane_pike"				"REMOVE"
+	"item_courier"					"REMOVE"
+	"item_sphere"					"REMOVE"
+	"item_trident"					"REMOVE"
+	"item_recipe_trident"			"REMOVE"
+	"item_bottle"					"REMOVE"
+	"item_phase_boots"				"REMOVE"
+	"item_skadi"					"REMOVE"
+	
+	//New items
+	"item_sange_datadriven"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_recipe_sange_datadriven"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_heavens_halberd_datadriven"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_recipe_heavens_halberd_datadriven"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_poor_mans_shield"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_recipe_poor_mans_shield"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_ring_of_aquila"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_recipe_ring_of_aquila" 
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_stout_shield"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_buckler_datadriven"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_recipe_buckler_datadriven"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_duo_sange_datadriven"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_recipe_double_desol_datadriven"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_double_desol_datadriven"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_recipe_desolator_2"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_recipe_power_treads_datadriven"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_recipe_power_treads_agility_datadriven"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_power_treads_intelligence_datadriven"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_power_treads_strength_datadriven"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_power_treads_agility_datadriven"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_recipe_blink_datadriven"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_blink_datadriven"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_tango_single"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_recipe_neckalce_lua"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_necklace_lua"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_recipe_blade_of_fury_datadriven"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_blade_of_fury_datadriven"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_recipe_butterfly"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_butterfly"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_kokain_datadriven"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_recipe_gamnodavi_datadriven"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_gamnodavi_datadriven"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_ogirok_sila"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_ogirok_agil"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_ogirok_int"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_redbull"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_recipe_nike"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_nike"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_recipe_demonic_nike"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_demonic_nike"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_recipe_subzero_mask"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_subzero_mask"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_recipe_skadi_datadriven"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_skadi_datadriven"
+	{
+		"ItemPurchasable"				"1"
+	}
+	
+	
+}

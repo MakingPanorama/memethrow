@@ -297,7 +297,7 @@ end
 sonic_scream_meow = sonic_scream_meow or class({})
 
 function sonic_scream_meow:OnAbilityPhaseStart()
-	EmitSoundOn(self:GetCaster(), "Hero_Sonic.Meow")
+	EmitSoundOn("Hero_Sonic.Meow", self:GetCaster())
 	return true
 end
 
@@ -306,17 +306,21 @@ function sonic_scream_meow:OnAbilityPhaseInterrupted()
 end
 
 function sonic_scream_meow:OnSpellStart()
-	local target = self:GetCursorTarget()
 	local caster = self:GetCaster()
+	local pind = FindUnitsInRadius(caster:GetTeamNumber(), caster:GetAbsOrigin(), nil, 300, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
+	self.duration = self:GetSpecialValueFor("duration")
 
-	local damage_table = {
-		victim = target,
-		attacker = caster,
-		ability = self,
-		damage = self:GetAbilityDamage(),
-		damage_type = self:GetAbilityDamageType()
-	}
 
-	ApplyDamage( damage_table )
-	ApplyFearCustomModifier( caster, target, self, self:GetSpecialValueFor("duration") )
+	for _,unit in ipairs(pind) do
+		local damage_table = {
+			victim = unit,
+			attacker = caster,
+			ability = self,
+			damage = self:GetSpecialValueFor("damage"),
+			damage_type = DAMAGE_TYPE_PURE
+		}
+
+		ApplyDamage( damage_table )
+		unit:AddNewModifier(self:GetCaster(), self, "modifier_screamed_custom", { duration = self.duration })
+	end
 end

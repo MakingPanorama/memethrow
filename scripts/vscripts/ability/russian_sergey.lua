@@ -17,6 +17,74 @@ function russian_sergey_what_is_this_word:GetCooldown(ilevel)
 	return self.BaseClass.GetCooldown( self, ilevel )
 end
 
+local function SpellReflect(parent, params)
+	-- If some spells shouldn't be reflected, enter it into this spell-list
+	local exception_spell =
+		{
+		["rubick_spell_steal"] = true,
+	}
+
+	local reflected_spell_name = params.ability:GetAbilityName()
+	local target = params.ability:GetCaster()
+
+	-- Does not reflect allies' projectiles for any reason
+	if target:GetTeamNumber() == parent:GetTeamNumber() then
+		return nil
+	end
+
+	-- FOR NOW, UNTIL LOTUS ORB IS DONE
+	-- Do not reflect spells if the target has Lotus Orb on, otherwise the game will die hard.
+	if target:HasModifier("modifier_item_lotus_orb_active") or target:HasModifier("modifier_item_mirror_shield") then
+		return nil
+	end
+
+	if ( not exception_spell[reflected_spell_name] ) and (not target:HasModifier("modifier_imba_spell_shield_buff_reflect")) then
+
+		-- If this is a reflected ability, do nothing
+		if params.ability.spell_shield_reflect then
+			return nil
+		end
+
+		local reflect_pfx = ParticleManager:CreateParticle("particles/units/heroes/hero_antimage/antimage_spellshield_reflect.vpcf", PATTACH_CUSTOMORIGIN_FOLLOW, parent)
+		ParticleManager:SetParticleControlEnt(reflect_pfx, 0, parent, PATTACH_POINT_FOLLOW, "attach_hitloc", parent:GetAbsOrigin(), true)
+		ParticleManager:ReleaseParticleIndex(reflect_pfx)
+
+		local old_spell = false
+		for _,hSpell in pairs(parent.tOldSpells) do
+			if hSpell ~= nil and hSpell:GetAbilityName() == reflected_spell_name then
+				old_spell = true
+				break
+			end
+		end
+		if old_spell then
+			ability = parent:FindAbilityByName(reflected_spell_name)
+		else
+			ability = parent:AddAbility(reflected_spell_name)
+			ability:SetStolen(true)
+			ability:SetHidden(true)
+
+			-- Tag ability as a reflection ability
+			ability.spell_shield_reflect = true
+
+			-- Modifier counter, and add it into the old-spell list
+			ability:SetRefCountsModifiers(true)
+			table.insert(parent.tOldSpells, ability)
+		end
+
+		ability:SetLevel(params.ability:GetLevel())
+		-- Set target & fire spell
+		parent:SetCursorCastTarget(target)
+		ability:OnSpellStart()
+		
+		-- This isn't considered vanilla behavior, but at minimum it should resolve any lingering channeled abilities...
+		if ability.OnChannelFinish then
+			ability:OnChannelFinish(false)
+		end	
+	end
+
+	return false
+end
+
 --
 -- Modifiers
 ---------
@@ -32,7 +100,9 @@ function modifier_reflector:OnCreated()
 
 	AbilityKV = LoadKeyValues("scripts/npc/npc_abilities_custom.txt")
 
-	tOldSpells = {} -- Table
+	self:GetParent().tOldSpells = {} -- Table
+
+	self:StartIntervalThink( FrameTime() )
 end
 
 function modifier_reflector:OnRefresh()
@@ -60,53 +130,29 @@ function modifier_reflector:GetAbsorbSpell( params )
 
 			self:PlayEffects( true )
 
-			EmitSoundOn(AbilityKV["AbilityCastSound"], self:GetCaster())
+			EmitSoundOn(AbilityKV[self:GetAbility():GetName()]["AbilityCastSound"], self:GetCaster())
 			return 1
 		end
 	end
 end
 
 
---
+
 
 modifier_reflector.reflected_spell = nil
 function modifier_reflector:GetReflectSpell( params )
+	return SpellReflect(self:GetParent(), params)
+end
+
+function modifier_reflector:OnIntervalThink()
 	if IsServer() then
-		-- If unable to reflect due to the source ability
-		if params.ability==nil or self.reflect_exceptions[params.ability:GetAbilityName()] then
-			return 0
-		end
-
-		if params.ability:GetCaster():HasModifier("modifier_lotus_orb_active") or params.ability:GetCaster():HasModifier("modifier_item_mirror_shield") then
-			return 0
-		end 
-
-		if (not self:GetParent():PassivesDisabled()) and self:GetAbility():IsFullyCastable() then
-			-- use resources
-			self.reflect = true
-
-			-- remove previous ability
-			if self.reflected_spell~=nil then
-				self:GetParent():RemoveAbility( self.reflected_spell:GetAbilityName() )
+		local caster = self:GetParent()
+		for i=#caster.tOldSpells,1,-1 do
+			local hSpell = caster.tOldSpells[i]
+			if hSpell:NumModifiersUsingAbility() == 0 and not hSpell:IsChanneling() then
+				hSpell:RemoveSelf()
+				table.remove(caster.tOldSpells,i)
 			end
-
-			-- copy the ability
-			local sourceAbility = params.ability
-			local selfAbility = self:GetParent():AddAbility( sourceAbility:GetAbilityName() )
-			selfAbility:SetLevel( sourceAbility:GetLevel() )
-			selfAbility:SetStolen( true )
-			selfAbility:SetHidden( true )
-
-			-- store the ability
-			self.reflected_spell = selfAbility
-
-			-- cast the ability
-			self:GetParent():SetCursorCastTarget( sourceAbility:GetCaster() )
-			selfAbility:CastAbility()
-
-			-- play effects
-			self:PlayEffects( false )
-			return 1
 		end
 	end
 end

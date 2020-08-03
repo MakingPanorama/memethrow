@@ -51,6 +51,8 @@ function MysticSnake( keys )
 	local mystic_snake_projectile = keys.mystic_snake_projectile
 	local particle_impact_enemy = keys.particle_impact_enemy
 	local particle_impact_friendly = keys.particle_impact_friendly
+
+	if target:TriggerSpellAbsorb( ability ) then return end
 	
 		
 

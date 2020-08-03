@@ -29,8 +29,11 @@ end
 function poter_experto_patronium:OnSpellStart()
 	local target = self:GetCursorTarget()
 
+	if target:TriggerSpellAbsorb( self ) then return end
+
 	EmitGlobalSound("SoundPatronum")
 	target:AddNewModifier(self:GetCaster(), self, "modifier_delay_damage", { duration = 2.5 })
+
 end
 
 --

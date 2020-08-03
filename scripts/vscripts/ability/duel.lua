@@ -12,6 +12,8 @@ function legion_commander_duel_datadriven_on_spell_start(keys)
 	local ability = keys.ability
 	local modifier_duel = "modifier_duel_datadriven"
 	
+	if target:TriggerSpellAbsorb( ability ) then return end
+
 	caster:EmitSound("Hero_LegionCommander.Duel.Cast")
 	caster:EmitSound("SoundDuel")
 	EmitGlobalSound("SoundFight")

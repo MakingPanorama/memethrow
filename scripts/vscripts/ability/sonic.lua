@@ -307,9 +307,9 @@ end
 function sonic_scream_meow:OnSpellStart()
 	local caster = self:GetCaster()
 	local pind = FindUnitsInRadius(caster:GetTeamNumber(), caster:GetAbsOrigin(), nil, 300, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
-	local meow_particle = ParticleManger:CreateParticle("particles/units/heroes/hero_queenofpain/queen_scream_of_pain.vpcf", PATTACH_POINT, self:GetCaster())
+	local meow_particle = ParticleManager:CreateParticle("particles/units/heroes/hero_queenofpain/queen_scream_of_pain_owner.vpcf", PATTACH_POINT, self:GetCaster())
 
-	ParticleManger:SetParticleControl(meow_particle, 1, Vector(300,300,0))
+	ParticleManager:SetParticleControl(meow_particle, 1, Vector(300,300,0))
 	self.duration = self:GetSpecialValueFor("duration")
 
 

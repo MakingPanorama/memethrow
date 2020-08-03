@@ -77,7 +77,7 @@ function modifier_reflector:GetReflectSpell( params )
 			return 0
 		end
 
-		if kv.ability:GetCaster():HasModifier("modifier_lotus_orb_active") or kv.ability:GetCaster():HasModifier("modifier_item_mirror_shield") then
+		if params.ability:GetCaster():HasModifier("modifier_lotus_orb_active") or params.ability:GetCaster():HasModifier("modifier_item_mirror_shield") then
 			return 0
 		end 
 

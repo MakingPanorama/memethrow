@@ -199,6 +199,14 @@ modifier_night_wings = modifier_night_wings or class({})
 
 function modifier_night_wings:IsHidden() return false end function modifier_night_wings:IsPassive() return false end function modifier_night_wings:IsPurgable() return false end
 
+function modifier_night_wings:OnCreated()
+	self:StartIntervalThink( FrameTime() * 3 )
+end
+
+function modifier_night_wings:OnIntervalThink()
+	AddFOWViewer(self:GetParent():GetTeamNumber(), self:GetParent():GetOrigin(), self:GetCaster():GetCurrentVisionRange(), FrameTime() * 4, false)
+end
+
 function modifier_night_wings:CheckState()
 	return {
 		[MODIFIER_STATE_FLYING] = true,
@@ -245,14 +253,26 @@ function modifier_form_change:OnCreated()
 	self.bonus_damage = self:GetAbility():GetSpecialValueFor("bonus_damage")
 	self.attack_speed = self:GetAbility():GetSpecialValueFor("bonus_attack_speed")
 
-	self.limit = 0
-
-	if self.limit < 1 then
-		self.wings = SpawnEntityFromTableSynchronous("prop_dynamic", { model = "models/heroes/nightstalker/nightstalker_wings_night.vmdl" })
-
-		self.wings:FollowEntity(self:GetParent(), true)
-		self.limit = self.limit + 1
+	self.normal_model = "models/heroes/bristleback/bristleback.vmdl"    
+	self.night_model = "models/heroes/nightstalker/nightstalker_night.vmdl"
+	
+	if not self:GetAbility():IsStolen() then
+		self:GetCaster():SetModel(self.night_model)
+		self:GetCaster():SetOriginalModel(self.night_model)
+		
+		if self.wings then
+			UTIL_Remove(self.wings)
+			UTIL_Remove(self.legs)
+			UTIL_Remove(self.tail)
+		end
+		self.wings = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/heroes/nightstalker/nightstalker_wings_night.vmdl"})
+		self.legs = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/heroes/nightstalker/nightstalker_legarmor_night.vmdl"})
+		self.tail = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/heroes/nightstalker/nightstalker_tail_night.vmdl"})
+		self.wings:FollowEntity(self:GetCaster(), true)
+		self.legs:FollowEntity(self:GetCaster(), true)
+		self.tail:FollowEntity(self:GetCaster(), true)
 	end
+
 end
 
 function modifier_form_change:OnRefresh()
@@ -261,7 +281,14 @@ function modifier_form_change:OnRefresh()
 end
 
 function modifier_form_change:OnDestroy()
-	UTIL_Remove( self.wings )
+	if self.wings then 
+		UTIL_Remove( self.wings )
+		UTIL_Remove( self.legs )
+		UTIL_Remove( self.tail )
+	end
+
+	self:GetCaster():SetModel(self.normal_model)
+	self:GetCaster():SetOriginalModel(self.normal_model)
 end
 
 function modifier_form_change:DeclareFunctions()
@@ -269,7 +296,6 @@ function modifier_form_change:DeclareFunctions()
 		MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
 		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
 		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
-		MODIFIER_PROPERTY_MODEL_CHANGE
 	}
 end
 
@@ -279,10 +305,6 @@ end
 
 function modifier_form_change:GetModifierAttackSpeedBonus_Constant()
 	return self.attack_speed
-end
-
-function modifier_form_change:GetModifierModelChange()
-	return "models/heroes/nightstalker/nightstalker_night.vmdl"
 end
 
 function modifier_form_change:GetModifierMoveSpeedBonus_Percentage()

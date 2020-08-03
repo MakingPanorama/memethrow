@@ -13,7 +13,7 @@ function avada_kedavra:GetManaCost( level )
 	return self.BaseClass.GetManaCost( self, level )
 end
 
-function avada_kedavra:CastFilterResultTarget(target) -- Thx Birzha)  
+function avada_kedavra:CastFilterResultTarget(target) -- Thx Birzha
     if IsServer() then
         local caster = self:GetCaster()
 
@@ -30,6 +30,8 @@ end
 
 function avada_kedavra:OnSpellStart()
 	local target = self:GetCursorTarget()
+
+	if target:TriggerSpellAbsorb( self ) then return end
 
 	EmitGlobalSound("SoundAvada")
 	target:AddNewModifier(self:GetCaster(), self, "modifier_delay_damage", { duration = 1.3 })

@@ -6925,6 +6925,33 @@
 			}
 		}
 	}
+	//
+	/// Russian Sergey What is this word?! (Что это за слово?!)
+	//////
+	"russian_sergey_what_is_this_word"
+	{
+		"BaseClass"             		"ability_lua"
+		"ScriptFile"					"ability/russian_sergey.lua"
+		"AbilityTextureName"			"ability_name"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"MaxLevel" 						"4"
+
+		"AbilityCooldown"				"18.0 14.0 12.0 10.0"
+
+		"AbilityCastSound"				"" // Enter your sound for this ability 
+
+		"HasScepterUpgrade"				"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"magic_resistance"			"10 20 30 40"
+			}
+		}
+	}
 	
 
 }

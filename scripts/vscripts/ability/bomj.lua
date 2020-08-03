@@ -11,7 +11,7 @@ function bomj_zabuhal:OnSpellStart()
 	local zabuhal = AbilityKV[self:GetName()]["AbilityCastSound"]
 	self.zabuhalTarget = AbilityKV[self:GetName()]["AbilityCastSound_Target"]
 
-	local units = FindUnitsInRadius(caster:GetTeamNumber(), target, nil, self:GetAOERadius(), DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, 0, false)
+	local units = FindUnitsInRadius(caster:GetTeamNumber(), target:GetAbsOrigin(), nil, self:GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, 0, false)
 
 	for _,unit in pairs( units ) do
 		local projectile = {
@@ -32,7 +32,7 @@ function bomj_zabuhal:OnProjectileHit(hTarget, vLocation)
 	if hTarget:TriggerSpellAbsorb( self ) then return end
 
 	if hTarget ~= nil then
-		hTarget:AddNewModifier(self:GetCaster(), self, "modifier_zabuhal_think", { duration = self:GetSpecialValueFor("szName") })
+		hTarget:AddNewModifier(self:GetCaster(), self, "modifier_zabuhal_think", { duration = self:GetSpecialValueFor("duration") })
 	end
 end
 
@@ -50,6 +50,7 @@ modifier_zabuhal_think = modifier_zabuhal_think or class({})
 
 function modifier_zabuhal_think:IsHidden() return false end
 function modifier_zabuhal_think:IsPurgable() return true end
+function modifier_zabuhal_think:GetAttributes() return MODIFIER_ATTRIBUTE_NONE end
 
 function modifier_zabuhal_think:OnCreated()
 	local ability = self:GetAbility()
@@ -61,9 +62,12 @@ function modifier_zabuhal_think:OnCreated()
 end
 
 function modifier_zabuhal_think:OnRefresh()
+	local ability = self:GetAbility()
 	self.damage_per_second = ability:GetSpecialValueFor("damage")
 	self.miss_percentage = ability:GetSpecialValueFor("miss_chance")
 	self.movement_speed_slow = ability:GetSpecialValueFor("movement_slow")
+
+	self:StartIntervalThink( 1.0 )
 end
 
 function modifier_zabuhal_think:OnIntervalThink()

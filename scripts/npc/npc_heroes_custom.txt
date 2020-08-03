@@ -2589,7 +2589,150 @@
 			}
 		}
 	}
-	
-	
-
+	"npc_dota_hero_bristleback"
+	{
+		"Model"		"models/heroes/bristleback/bristleback.vmdl"
+		"SoundSet"		"Hero_Bristleback"
+		"IdleSoundLoop"		"Hero_Bristleback.IdleLoop"
+		"Enabled"		"1"
+		"Role"			"Carry,Durable,Initiator,Nuker"
+		"Rolelevels"	"2,3,1,1"
+		"Complexity"	"1"
+		"Team"		"Good"
+		"HeroID"		"99"
+		"BotImplemented"		"1"
+		"ModelScale"		"0.800000"
+		"VersusScale"		"0.880000"
+		"LoadoutScale"		"0.900000"
+		"NameAliases"		"Rigwarl;bb"
+		"workshop_guide_name"		"Bristleback"
+		"HasAggressiveStance"		"1"
+		"PickSound"		"bristleback_bristle_spawn_01"
+		"BanSound"		"bristleback_bristle_anger_09"
+		"CMEnabled"		"1"
+		"new_player_enable"		"1"
+		"LastHitChallengeRival"		"npc_dota_hero_dragon_knight"
+		"HeroSelectSoundEffect"		"Hero_Bristleback.Pick"
+		"GibType"		"goo"
+		"GibTintColor"	"203 29 0 255"
+		"Ability1"		"pangolier_gyroshell"
+		"Ability2"		"sonic_time_deceleration"
+		"Ability3"		"sonic_magic_ring"
+		"Ability4"		"sonic_form_in_horror"
+		"Ability5"		"generic_hidden"
+		"Ability6"		"sonic_super_speed"
+		"Ability7"		"pangolier_gyroshell_stop"
+		"Ability10"					"special_bonus_mp_regen_2"
+		"Ability11"					"special_bonus_unique_pangolier_7"
+		"Ability12"					"special_bonus_unique_pangolier_2"
+		"Ability13"					"special_bonus_unique_pangolier_6"
+		"Ability14"					"special_bonus_unique_pangolier_3"
+		"Ability15"					"special_bonus_strength_16"
+		"Ability16"					"special_bonus_unique_pangolier_4"
+		"Ability17"					"special_bonus_unique_pangolier_5"
+		"ArmorPhysical"		"1.000000"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"		"25"
+		"AttackDamageMax"		"35"
+		"AttackRate"		"1.800000"
+		"AttackAnimationPoint"		"0.300000"
+		"AttackAcquisitionRange"		"600"
+		"AttackRange"		"150"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"22"
+		"AttributeStrengthGain"		"2.900000"
+		"AttributeBaseAgility"		"17"
+		"AttributeAgilityGain"		"1.800000"
+		"AttributeBaseIntelligence"		"14"
+		"AttributeIntelligenceGain"		"2.800000"
+		"MovementSpeed"		"290"
+		"MovementTurnRate"		"1.000000"
+		"particle_folder"		"particles/units/heroes/hero_bristleback"
+		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_bristleback.vsndevts"
+		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_bristleback.vsndevts"
+		"RenderablePortrait"
+		{
+			"Particles"
+			{
+				"particles/units/heroes/hero_bristleback/bristleback_loadout.vpcf"		"loadout"
+			}
+		}
+		"ItemSlots"
+		{
+			"0"
+			{
+				"SlotIndex"		"0"
+				"SlotName"		"weapon"
+				"SlotText"		"#LoadoutSlot_Weapon"
+				"TextureWidth"		"256"
+				"TextureHeight"		"256"
+				"MaxPolygonsLOD0"		"1000"
+				"MaxPolygonsLOD1"		"550"
+			}
+			"1"
+			{
+				"SlotIndex"		"1"
+				"SlotName"		"head"
+				"SlotText"		"#LoadoutSlot_Head_Accessory"
+				"TextureWidth"		"256"
+				"TextureHeight"		"256"
+				"MaxPolygonsLOD0"		"1000"
+				"MaxPolygonsLOD1"		"500"
+			}
+			"2"
+			{
+				"SlotIndex"		"2"
+				"SlotName"		"back"
+				"SlotText"		"#LoadoutSlot_Back"
+				"TextureWidth"		"256"
+				"TextureHeight"		"256"
+				"MaxPolygonsLOD0"		"1400"
+				"MaxPolygonsLOD1"		"900"
+			}
+			"3"
+			{
+				"SlotIndex"		"3"
+				"SlotName"		"neck"
+				"SlotText"		"#LoadoutSlot_Neck"
+				"TextureWidth"		"256"
+				"TextureHeight"		"256"
+				"MaxPolygonsLOD0"		"800"
+				"MaxPolygonsLOD1"		"600"
+			}
+			"4"
+			{
+				"SlotIndex"		"4"
+				"SlotName"		"arms"
+				"SlotText"		"#LoadoutSlot_arms"
+				"TextureWidth"		"256"
+				"TextureHeight"		"256"
+				"MaxPolygonsLOD0"		"800"
+				"MaxPolygonsLOD1"		"600"
+			}
+			"5"
+			{
+				"SlotIndex"		"5"
+				"SlotName"		"summon"
+				"SlotText"		"#LoadoutSlot_Pet"
+				"ShowItemOnGeneratedUnits" "1"
+				"GeneratesUnits"
+				{
+					"0" "npc_dota_companion"
+				}
+			}
+			"6"
+			{
+				"SlotIndex"		"6"
+				"SlotName"		"taunt"
+				"SlotText"		"#LoadoutSlot_Taunt"
+			}
+			"7"
+			{
+				"SlotIndex"		"7"
+				"SlotName"		"ambient_effects"
+				"SlotText"		"#LoadoutSlot_Ambient_Effects"
+				"DisplayInLoadout"		"0"
+			}
+		}
+	}
 }

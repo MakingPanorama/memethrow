@@ -3623,18 +3623,7 @@
 			"Function"			"Damagedeal"
 		
 		}
-
-		"FireSound"
-		{
-			"EffectName"		"SoundKnife"
-			"Target"			"TARGET"
-		}
-
-		"ApplyModifier"
-		{
-			"ModifierName"		"modifier_stifling_dagger_slow_datadriven"
-			"Target"			"TARGET"
-		}
+			//"SoundKnife"
 	}
 
 	"Modifiers"
@@ -4293,6 +4282,8 @@
 	"AbilityCastSoundPhase"	"Sound1" // Sniper Load
 	"AbilityCastSoundLaunch"	"SoundBullet" // Sniper Shot
 	"AbilityCastSoundHit"	"SoundDmg" // Sniper Hited
+
+	"AbilityTest"		"10 20 30 40"
 
 	// Special
 	//-------------------------------------------------------------------------------------------------------------
@@ -5412,13 +5403,6 @@
 			"EffectName"        "particles/units/heroes/hero_chen/chen_test_of_faith.vpcf"
 			"EffectAttachType"  "follow_origin"
 			"Target"            "TARGET"
-		}
-
-		"Damage"
-		{
-			"Target"		"TARGET"
-			"Type"			"DAMAGE_TYPE_MAGICAL"
-			"Damage"		"? %damage_min %damage_max"
 		}
 	}
 }
@@ -6764,7 +6748,7 @@
 
 		"AbilityCooldown"				"18.0 14.0 12.0 10.0"
 
-		"AbilityCastSound"				"Hero_Antimage.Counterspell.Cast" // Enter your sound for this ability 
+		"AbilityCastSound"				"Hero_Sergey.WhatIsThisWord" // Enter your sound for this ability 
 
 		"HasScepterUpgrade"				"1"
 
@@ -6780,3 +6764,9 @@
 
 }
 	
+
+
+
+
+
+

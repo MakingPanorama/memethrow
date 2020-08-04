@@ -8,7 +8,7 @@ function bomj_zabuhal:OnSpellStart()
 	local caster = self:GetCaster()
 	local target = self:GetCursorTarget()
 
-	local zabuhal = AbilityKV[self:GetName()]["AbilityCastSound"]
+	self.zabuhal = AbilityKV[self:GetName()]["AbilityCastSound"]
 	self.zabuhalTarget = AbilityKV[self:GetName()]["AbilityCastSound_Target"]
 
 	local units = FindUnitsInRadius(caster:GetTeamNumber(), target:GetAbsOrigin(), nil, self:GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, 0, false)
@@ -20,12 +20,14 @@ function bomj_zabuhal:OnSpellStart()
 			Target = unit,
 			iMoveSpeed = 880,
 			bDodgeable = true,
-			bProvidesVision = false
+			bProvidesVision = false,
+			EffectName = "particles/units/heroes/hero_brewmaster/brewmaster_drunken_haze.vpcf"
 		}
 		ProjectileManager:CreateTrackingProjectile( projectile )
 	end
 
-	EmitSoundOn(zabuhal, target)
+	EmitSoundOn(self.zabuhalTarget, caster)
+
 end
 
 function bomj_zabuhal:OnProjectileHit(hTarget, vLocation)
@@ -34,6 +36,7 @@ function bomj_zabuhal:OnProjectileHit(hTarget, vLocation)
 	if hTarget ~= nil then
 		hTarget:AddNewModifier(self:GetCaster(), self, "modifier_zabuhal_think", { duration = self:GetSpecialValueFor("duration") })
 	end
+	EmitSoundOn(self.zabuhal, self:GetCaster())
 end
 
 function bomj_zabuhal:OnUpgrade()

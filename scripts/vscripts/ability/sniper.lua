@@ -50,8 +50,9 @@ function sniper_assassinate_lua:OnProjectileHit(hTarget, vLocation)
 	if hTarget:TriggerSpellAbsorb( self ) then return end
 
 	hTarget:Kill( self, self:GetCaster() )
-
-	EmitGlobalSound(AbilityKV[self:GetName()]["AbilityCastSoundHit"])
+	if hTarget:IsRealHero() then
+		EmitGlobalSound(AbilityKV[self:GetName()]["AbilityCastSoundHit"])
+	end
 end
 
 
@@ -61,6 +62,41 @@ function modifier_assassinate_target:IsHidden() return false end function modifi
 
 function modifier_assassinate_target:GetEffectName()
 	return "particles/units/heroes/hero_sniper/sniper_crosshair.vpcf"
+end
+
+function modifier_assassinate_target:OnCreated()
+	self:StartIntervalThink( FrameTime() * 3 )
+end
+
+function modifier_assassinate_target:OnIntervalThink()
+	if self:GetParent() ~= nil then
+		AddFOWViewer(self:GetCaster():GetTeamNumber(), self:GetParent():GetAbsOrigin(), 100, FrameTime() * 4, false)
+	end
+end
+
+function modifier_assassinate_target:DeclareFunctions()
+	return {
+		MODIFIER_EVENT_ON_HERO_KILLED
+	}
+end
+
+function modifier_assassinate_target:CheckState()
+	return {
+		MODIFIER_STATE_PROVIDES_VISION
+	}
+end
+
+function modifier_assassinate_target:OnHeroKilled( kv )
+	local target = kv.target
+
+	if self:GetParent() == target then
+		target:StartGesture( ACT_DOTA_DEFEAT )
+
+		Timers:CreateTimer(6,function()
+			target:FadeGesture( ACT_DOTA_DEFEAT )
+		end)
+
+	end
 end
 
 function modifier_assassinate_target:GetEffectAttachType()

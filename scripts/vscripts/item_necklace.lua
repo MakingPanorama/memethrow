@@ -21,8 +21,6 @@ end
 
 function modifier_item_necklace:GetAttributes()		return MODIFIER_ATTRIBUTE_PERMANENT + MODIFIER_ATTRIBUTE_MULTIPLE
 end
-
-
 function modifier_item_necklace:DeclareFunctions()
 	
 	return {

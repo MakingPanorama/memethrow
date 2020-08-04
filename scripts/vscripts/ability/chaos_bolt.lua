@@ -40,6 +40,8 @@ function ChaosBolt( keys )
 	local ability = keys.ability
 	local ability_level = ability:GetLevel() - 1
 
+	if target:TriggerSpellAbsorb( ability ) then return end
+
 	-- Ability variables
 	local stun_min = ability:GetLevelSpecialValueFor("stun_min", ability_level)
 	local stun_max = ability:GetLevelSpecialValueFor("stun_max", ability_level) 

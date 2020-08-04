@@ -4,6 +4,9 @@ function Damagedeal( keys )
 	local target = keys.target
 	local damage = ability:GetSpecialValueFor("damages")
 	local damage_pct = ability:GetSpecialValueFor("damage_pct")
+
+	if target:TriggerSpellAbsorb( ability ) then return end
+
 	if caster:HasScepter() then
 		 damage_pct = ability:GetSpecialValueFor("damage_pct_scepter")
 	end
@@ -19,4 +22,7 @@ function Damagedeal( keys )
 
 		ApplyDamage(damage_table)
 	
+	ability:ApplyDataDrivenModifier(caster, target, "modifier_stifling_dagger_slow_datadriven", {})
+
+	EmitSoundOn("SoundKnife", caster)
 end

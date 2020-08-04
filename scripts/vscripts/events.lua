@@ -34,22 +34,22 @@ function COverthrowGameMode:OnGameRulesStateChange()
 		local numberOfPlayers = PlayerResource:GetPlayerCount()
 		if numberOfPlayers > 7 then
 			--self.TEAM_KILLS_TO_WIN = 25
-			nCOUNTDOWNTIMER = 2300
+			nCOUNTDOWNTIMER = 2700
 		elseif numberOfPlayers > 4 and numberOfPlayers <= 7 then
 			--self.TEAM_KILLS_TO_WIN = 20
-			nCOUNTDOWNTIMER = 2000
+			nCOUNTDOWNTIMER = 2700
 		else
 			--self.TEAM_KILLS_TO_WIN = 15
-			nCOUNTDOWNTIMER = 1500
+			nCOUNTDOWNTIMER = 2700
 		end
 		if GetMapName() == "forest_solo" then
-			self.TEAM_KILLS_TO_WIN = 30
+			self.TEAM_KILLS_TO_WIN = 40
 		elseif GetMapName() == "desert_duo" then
-			self.TEAM_KILLS_TO_WIN = 30
-		elseif GetMapName() == "desert_quintet" then
 			self.TEAM_KILLS_TO_WIN = 50
-		elseif GetMapName() == "temple_quartet" then
+		elseif GetMapName() == "desert_quintet" then
 			self.TEAM_KILLS_TO_WIN = 60
+		elseif GetMapName() == "temple_quartet" then
+			self.TEAM_KILLS_TO_WIN = 70
 		else
 			self.TEAM_KILLS_TO_WIN = 30
 		end

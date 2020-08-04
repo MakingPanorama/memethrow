@@ -19,9 +19,9 @@ end
 
 local function SpellReflect(parent, params)
 	-- If some spells shouldn't be reflected, enter it into this spell-list
-	local exception_spell =
-		{
+	local exception_spell = {
 		["rubick_spell_steal"] = true,
+		["duel_datadriven"] = true,
 	}
 
 	local reflected_spell_name = params.ability:GetAbilityName()
@@ -38,7 +38,7 @@ local function SpellReflect(parent, params)
 		return nil
 	end
 
-	if ( not exception_spell[reflected_spell_name] ) and (not target:HasModifier("modifier_imba_spell_shield_buff_reflect")) then
+	if ( not exception_spell[reflected_spell_name] ) then
 
 		-- If this is a reflected ability, do nothing
 		if params.ability.spell_shield_reflect then
@@ -124,7 +124,7 @@ end
 
 function modifier_reflector:GetAbsorbSpell( params )
 	if IsServer() then
-		if ( not self:GetParent():PassivesDisabled()) and self:GetAbility():IsFullyCastable() then
+		if ( not self:GetParent():PassivesDisabled()) and self:GetAbility():IsFullyCastable() or self:GetAbility():IsCooldownReady() then
 			-- use resources
 			self:GetAbility():UseResources( false, false, true )
 
@@ -141,7 +141,9 @@ end
 
 modifier_reflector.reflected_spell = nil
 function modifier_reflector:GetReflectSpell( params )
-	return SpellReflect(self:GetParent(), params)
+	if self:GetAbility():IsCooldownReady() then
+		return SpellReflect(self:GetParent(), params)
+	end
 end
 
 function modifier_reflector:OnIntervalThink()

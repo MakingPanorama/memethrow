@@ -1,5 +1,3 @@
---Harry Poter Experto Patronium
-
 LinkLuaModifier("modifier_delay_damage", "ability/rubick.lua", LUA_MODIFIER_MOTION_NONE)
 
 poter_experto_patronium = poter_experto_patronium or class({})

@@ -188,6 +188,21 @@ function modifier_reflector:PlayEffects( bBlock )
 	EmitSoundOn( sound_cast, self:GetParent() )
 end
 
-modifier_reflector.reflect_exceptions = {
-	["rubick_spell_steal_lua"] = true
-}
+russian_sergey_home = russian_sergey_home or class({})
+
+AbilityKV = LoadKeyValues("scripts/npc/npc_abilities_custom.txt")
+
+function russian_sergey_home:OnSpellStart()
+	local target = self:GetCursorTarget()
+
+	if target:TriggerSpellAbsorb( self ) then return end
+
+	local units = FindUnitsInRadius(target:GetTeamNumber(), Vector(0,0,0), nil, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, 0, false)
+
+	for _,unit in pairs(units) do
+		if unit:GetClassname() == "ent_dota_fountain" then
+			FindClearSpaceForUnit(target, unit:GetAbsOrigin(), true)
+			EmitGlobalSound(AbilityKV[self:GetName()]["AbilityCastSound"])
+		end
+	end
+end

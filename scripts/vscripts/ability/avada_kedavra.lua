@@ -6,7 +6,7 @@ voldemort_avada_kedavra = voldemort_avada_kedavra or class({})
 
 function voldemort_avada_kedavra:OnAbilityPhaseStart()
 	local target = self:GetCursorTarget()
-	
+
 	self:GetCaster():FaceTowards( target:GetAbsOrigin() )
 
 	EmitSoundOn("SoundAvada", self:GetCaster())

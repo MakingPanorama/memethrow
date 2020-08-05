@@ -82,6 +82,7 @@ function Precache( context )
 		PrecacheResource( "particle", "particles/units/heroes/hero_crystalmaiden/maiden_frostbite_buff.vpcf", context )
 		PrecacheResource( "particle", "particles/generic_gameplay/generic_slowed_cold.vpcf", context )
 		PrecacheResource( "particle", "particles/units/heroes/hero_crystalmaiden/maiden_frostbite.vpcf", context )
+		
        	
 	--Cache particles for traps
 		PrecacheResource( "particle_folder", "particles/units/heroes/hero_dragon_knight", context )
@@ -91,9 +92,6 @@ function Precache( context )
 		
 
 	--Cache sounds for traps
-		PrecacheResource( "soundfile", "soundevents/heroes/russian_sergey.vsndevts", context)
-		PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_antimage.vsndevts", context)
-		PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_pangolier.vsndevts", context)
 		PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/soundevents_conquest.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/bomj_euu.vsndevts", context )
@@ -136,8 +134,10 @@ function Precache( context )
 		PrecacheResource( "soundfile", "soundevents/shrek.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/z_redbull.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/z_razgon.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/heroes/sonic.vsndevts", context)
+		PrecacheResource( "soundfile", "soundevents/sonic.vsndevts", context)
 		PrecacheResource( "soundfile", "soundevents/items.vsndevts", context)
+		PrecacheResource( "soundfile", "soundevents/serega.vsndevts", context)
+		PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_batrider.vsndevts", context)
 		
 end
 
@@ -267,7 +267,7 @@ function COverthrowGameMode:InitGameMode()
 	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_INVISIBILITY, true ) --Invis
 	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_REGENERATION, false ) --Regen
 	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_ARCANE, true ) --Arcane
-	--GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_BOUNTY, true ) --Bounty
+	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_BOUNTY, true ) --Bounty
 	GameRules:GetGameModeEntity():SetLoseGoldOnDeath( false )
 	GameRules:GetGameModeEntity():SetFountainPercentageHealthRegen( 100 )
 	GameRules:GetGameModeEntity():SetFountainPercentageManaRegen( 100 )
@@ -282,6 +282,7 @@ function COverthrowGameMode:InitGameMode()
 	ListenToGameEvent( "entity_killed", Dynamic_Wrap( COverthrowGameMode, 'OnEntityKilled' ), self )
 	ListenToGameEvent( "dota_item_picked_up", Dynamic_Wrap( COverthrowGameMode, "OnItemPickUp"), self )
 	ListenToGameEvent( "dota_npc_goal_reached", Dynamic_Wrap( COverthrowGameMode, "OnNpcGoalReached" ), self )
+	ListenToGameEvent("dota_player_gained_level", Dynamic_Wrap(COverthrowGameMode, 'OnHeroLeveled'), self)
 
 	Convars:RegisterCommand( "overthrow_force_item_drop", function(...) self:ForceSpawnItem() end, "Force an item drop.", FCVAR_CHEAT )
 	Convars:RegisterCommand( "overthrow_force_gold_drop", function(...) self:ForceSpawnGold() end, "Force gold drop.", FCVAR_CHEAT )

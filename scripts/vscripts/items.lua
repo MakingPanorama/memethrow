@@ -73,21 +73,20 @@ function COverthrowGameMode:SpecialItemAdd( event )
 	local tableindex = 0
 	local tier1 = 
 	{
-		"item_urn_of_shadows",
-		"item_ring_of_basilius",
-		"item_ring_of_aquila",
-		"item_arcane_boots",
-		"item_tranquil_boots",
-		"item_phase_boots",
-		"item_power_treads",
-		"item_medallion_of_courage",
-		"item_soul_ring",
-		"item_gem",
-		"item_orb_of_venom"
+		"item_enchanted_mango",
+		"item_faerie_fire",
+		"item_kokain_datadriven",
+		"item_ward_observer",
+		"item_tome_of_knowledge",
+		"item_ogirok_sila",
+		"item_ogirok_agil",
+		"item_ogirok_int",
+		"item_redbull"
 	}
 	local tier2 = 
 	{
 		"item_blink",
+		"item_sange_datadriven",
 		"item_force_staff",
 		"item_cyclone",
 		"item_ghost",
@@ -95,41 +94,43 @@ function COverthrowGameMode:SpecialItemAdd( event )
 		"item_mask_of_madness",
 		"item_blade_mail",
 		"item_helm_of_the_dominator",
-		"item_vladmir",
 		"item_yasha",
 		"item_mekansm",
 		"item_hood_of_defiance",
-		"item_veil_of_discord",
-		"item_glimmer_cape"
+		"item_heavens_halberd_datadriven",
+		"item_nike",
+		"item_power_treads_strength_datadriven",
+		"item_maelstrom"
 	}
 	local tier3 = 
 	{
 		"item_blink_datadriven",
 		"item_shivas_guard",
-		"item_sphere",
+		"item_skadi_datadriven",
 		"item_diffusal_blade",
-		"item_maelstrom",
 		"item_basher",
 		"item_invis_sword",
 		"item_desolator",
 		"item_ultimate_scepter",
 		"item_bfury",
 		"item_pipe",
-		"item_heavens_halberd",
 		"item_crimson_guard",
 		"item_black_king_bar",
 		"item_bloodstone",
 		"item_lotus_orb",
 		"item_guardian_greaves",
-		"item_moon_shard"
+		"item_moon_shard",
+		"item_duo_sange_datadriven",
+		"item_buckler_datadriven",
+		"item_necklace_lua",
+		"item_blade_of_fury_datadriven",
+		"item_gamnodavi_datadriven",
+		"item_demonic_nike"
 	}
 	local tier4 = 
 	{
-		"item_skadi_datadriven",
-		"item_sange_and_yasha",
 		"item_greater_crit",
 		"item_sheepstick",
-		"item_orchid",
 		"item_heart",
 		"item_mjollnir",
 		"item_ethereal_blade",
@@ -140,7 +141,9 @@ function COverthrowGameMode:SpecialItemAdd( event )
 		"item_satanic",
 		"item_octarine_core",
 		"item_silver_edge",
-		"item_rapier"
+		"item_double_desol_datadriven",
+		"item_subzero_mask"
+		
 	}
 
 	local t1 = PickRandomShuffle( tier1, self.tier1ItemBucket )
@@ -151,29 +154,29 @@ function COverthrowGameMode:SpecialItemAdd( event )
 	local spawnedItem = ""
 
 	-- pick the item we're giving them
-	if GetTeamHeroKills( leader ) > 5 and GetTeamHeroKills( leader ) <= 10 then
-		if ownerTeam == leader and ( self.leadingTeamScore - self.runnerupTeamScore > 3 ) then
-			spawnedItem = t1
-		elseif ownerTeam == lastPlace then
-			spawnedItem = t3
+	if GetTeamHeroKills( leader ) > 1 and GetTeamHeroKills( leader ) <= 10 then -- когда у лидера от 1 до 10 килов
+		if ownerTeam == leader then -- если взял лидер
+			spawnedItem = t1	-- получает залупу
+		elseif ownerTeam == lastPlace then -- если взял лузер
+			spawnedItem = t3 -- получает т3 айтем
 		else
-			spawnedItem = t2
+			spawnedItem = t2 -- всё остальное получает т2
 		end
-	elseif GetTeamHeroKills( leader ) > 10 and GetTeamHeroKills( leader ) <= 15 then
-		if ownerTeam == leader and ( self.leadingTeamScore - self.runnerupTeamScore > 3 ) then
-			spawnedItem = t2
-		elseif ownerTeam == lastPlace then
-			spawnedItem = t4
+	elseif GetTeamHeroKills( leader ) > 10 then -- когда у лидера от 10 до 60 килов
+		if ownerTeam == leader then -- если подобрал лидер от 10 килов
+			spawnedItem = t1 -- дать залупу
+		elseif ownerTeam == lastPlace then -- если взял лузер
+			spawnedItem = t4 -- дать самые пиздатые шмотки
 		else
-			spawnedItem = t3
+			spawnedItem = t3 -- всем остальным норм шмотки
 		end
 	else
-		spawnedItem = t2
+		spawnedItem = t2 -- всё остальное получает т2
 	end
 
 	-- add the item to the inventory and broadcast
 	owner:AddItemByName( spawnedItem )
-	EmitGlobalSound("powerup_04")
+	EmitGlobalSound("SoundGood")
 	local overthrow_item_drop =
 	{
 		hero_id = hero,
@@ -243,7 +246,7 @@ function COverthrowGameMode:WarnItem()
 
 	-- notify everyone
 	CustomGameEventManager:Send_ServerToAllClients( "item_will_spawn", { spawn_location = spawnLocation } )
-	EmitGlobalSound( "powerup_03" )
+	EmitGlobalSound( "SoundPodarki" )
 	
 	-- fire the destination particles
 	DoEntFire( "item_spawn_particle_" .. self.itemSpawnIndex, "Start", "0", 0, self, self )
@@ -259,7 +262,7 @@ end
 function COverthrowGameMode:SpawnItem()
 	-- notify everyone
 	CustomGameEventManager:Send_ServerToAllClients( "item_has_spawned", {} )
-	EmitGlobalSound( "powerup_05" )
+	EmitGlobalSound( "SoundPodarki" )
 
 	-- spawn the item
 	local startLocation = Vector( 0, 0, 700 )
@@ -310,7 +313,7 @@ function COverthrowGameMode:TreasureDrop( treasureCourier )
 	local deathEffects = ParticleManager:CreateParticle( "particles/treasure_courier_death.vpcf", PATTACH_CUSTOMORIGIN, nil)
 	ParticleManager:SetParticleControl( deathEffects, 0, fxPoint )
 	ParticleManager:SetParticleControlOrientation( deathEffects, 0, treasureCourier:GetForwardVector(), treasureCourier:GetRightVector(), treasureCourier:GetUpVector() )
-	EmitGlobalSound( "lockjaw_Courier.Impact" )
+	EmitGlobalSound( "SoundOpensuka" )
 	EmitGlobalSound( "lockjaw_Courier.gold_big" )
 
 	--Spawn the treasure chest at the selected item spawn location

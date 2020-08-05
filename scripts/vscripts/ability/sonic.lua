@@ -65,7 +65,7 @@ function modifier_sonic_super_speed:GetEffectAttachType()
 end
 
 --
--- Current Ability: Sonic Time Deceleration(Not using)
+-- Current Ability: Sonic Time Deceleration
 --------
 
 sonic_time_deceleration = sonic_time_deceleration or class({})
@@ -199,14 +199,6 @@ modifier_night_wings = modifier_night_wings or class({})
 
 function modifier_night_wings:IsHidden() return false end function modifier_night_wings:IsPassive() return false end function modifier_night_wings:IsPurgable() return false end
 
-function modifier_night_wings:OnCreated()
-	self:StartIntervalThink( FrameTime() * 3 )
-end
-
-function modifier_night_wings:OnIntervalThink()
-	AddFOWViewer(self:GetParent():GetTeamNumber(), self:GetParent():GetOrigin(), self:GetCaster():GetCurrentVisionRange(), FrameTime() * 4, false)
-end
-
 function modifier_night_wings:CheckState()
 	return {
 		[MODIFIER_STATE_FLYING] = true,
@@ -253,26 +245,15 @@ function modifier_form_change:OnCreated()
 	self.bonus_damage = self:GetAbility():GetSpecialValueFor("bonus_damage")
 	self.attack_speed = self:GetAbility():GetSpecialValueFor("bonus_attack_speed")
 
-	self.normal_model = "models/heroes/bristleback/bristleback.vmdl"    
-	self.night_model = "models/heroes/nightstalker/nightstalker_night.vmdl"
-	
-	if not self:GetAbility():IsStolen() then
-		self:GetCaster():SetModel(self.night_model)
-		self:GetCaster():SetOriginalModel(self.night_model)
-		
-		if self.wings then
-			UTIL_Remove(self.wings)
-			UTIL_Remove(self.legs)
-			UTIL_Remove(self.tail)
-		end
-		self.wings = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/heroes/nightstalker/nightstalker_wings_night.vmdl"})
-		self.legs = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/heroes/nightstalker/nightstalker_legarmor_night.vmdl"})
-		self.tail = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/heroes/nightstalker/nightstalker_tail_night.vmdl"})
-		self.wings:FollowEntity(self:GetCaster(), true)
-		self.legs:FollowEntity(self:GetCaster(), true)
-		self.tail:FollowEntity(self:GetCaster(), true)
-	end
+	self.limit = 0
 
+	if self.limit < 1 then
+		self.wings = SpawnEntityFromTableSynchronous("prop_dynamic", { model = "models/heroes/nightstalker/nightstalker_wings_night.vmdl" })
+
+		self.wings:FollowEntity(self:GetParent(), true)
+		self.wings:RemoveEffects( EF_NODRAW )
+		self.limit = self.limit + 1
+	end
 end
 
 function modifier_form_change:OnRefresh()
@@ -281,14 +262,7 @@ function modifier_form_change:OnRefresh()
 end
 
 function modifier_form_change:OnDestroy()
-	if self.wings then 
-		UTIL_Remove( self.wings )
-		UTIL_Remove( self.legs )
-		UTIL_Remove( self.tail )
-	end
-
-	self:GetCaster():SetModel(self.normal_model)
-	self:GetCaster():SetOriginalModel(self.normal_model)
+	self.wings:AddEffects( EF_NODRAW )
 end
 
 function modifier_form_change:DeclareFunctions()
@@ -296,6 +270,7 @@ function modifier_form_change:DeclareFunctions()
 		MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
 		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
 		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
+		MODIFIER_PROPERTY_MODEL_CHANGE
 	}
 end
 
@@ -307,44 +282,14 @@ function modifier_form_change:GetModifierAttackSpeedBonus_Constant()
 	return self.attack_speed
 end
 
+function modifier_form_change:GetModifierModelChange()
+	return "models/heroes/nightstalker/nightstalker_night.vmdl"
+end
+
 function modifier_form_change:GetModifierMoveSpeedBonus_Percentage()
 	return 100
 end
 
 function modifier_form_change:GetEffectName()
 	return "particles/units/heroes/hero_bloodseeker/bloodseeker_rupture.vpcf"
-end
-
-sonic_scream_meow = sonic_scream_meow or class({})
-
-function sonic_scream_meow:OnAbilityPhaseStart()
-	EmitSoundOn("Hero_Sonic.Meow", self:GetCaster())
-	return true
-end
-
-function sonic_scream_meow:OnAbilityPhaseInterrupted()
-	self:GetCaster():StopSound("Hero_Sonic.Meow")
-end
-
-function sonic_scream_meow:OnSpellStart()
-	local caster = self:GetCaster()
-	local pind = FindUnitsInRadius(caster:GetTeamNumber(), caster:GetAbsOrigin(), nil, 300, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
-	local meow_particle = ParticleManager:CreateParticle("particles/units/heroes/hero_queenofpain/queen_scream_of_pain_owner.vpcf", PATTACH_POINT, self:GetCaster())
-
-	ParticleManager:SetParticleControl(meow_particle, 1, Vector(300,300,0))
-	self.duration = self:GetSpecialValueFor("duration")
-
-
-	for _,unit in ipairs(pind) do
-		local damage_table = {
-			victim = unit,
-			attacker = caster,
-			ability = self,
-			damage = self:GetSpecialValueFor("damage"),
-			damage_type = DAMAGE_TYPE_PURE
-		}
-
-		ApplyDamage( damage_table )
-		unit:AddNewModifier(self:GetCaster(), self, "modifier_screamed_custom", { duration = self.duration })
-	end
 end

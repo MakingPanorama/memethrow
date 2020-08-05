@@ -5500,91 +5500,6 @@
 	}
 
 	//=================================================================================================================
-	// Recipe: Heart
-	//=================================================================================================================
-	"item_recipe_heart"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"ID"							"113"														// unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
-		"Model"							"models/props_gameplay/recipe.vmdl"
-		
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"400"	
-		"ItemShopTags"					""
-		
-		// Recipe
-		//-------------------------------------------------------------------------------------------------------------
-		"ItemRecipe"					"1"
-		"ItemResult"					"item_heart"
-		"ItemRequirements"
-		{
-			"01"						"item_ring_of_tarrasque;item_vitality_booster;item_reaver"
-		}
-	}
-	
-	//=================================================================================================================
-	// Heart
-	//=================================================================================================================
-	"item_heart"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"ID"						"114"														// unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-
-		// Stats		
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"7.0"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"5200"
-		"ItemShopTags"					"str;regen_health;health_pool"
-		"ItemQuality"					"epic"
-		"ItemAliases"					"hot;heart of tarrasque"
-		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
-		"ShouldBeSuggested"				"1"
-		
-		// Special	
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"bonus_strength"		"45"
-			}
-			"02"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"bonus_health"			"400"
-			}
-			"03"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"hp_regen_amp"			"50"
-			}
-			"04"
-			{
-				"var_type"				"FIELD_FLOAT"
-				"health_regen_rate"		"5"
-			}
-			"05"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"cooldown_melee"		"5"
-			}
-			"06"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"cooldown_ranged_tooltip"		"7"
-			}
-		}
-	}
-
-	//=================================================================================================================
 	// Recipe: Black King Bar
 	//=================================================================================================================
 	"item_recipe_black_king_bar"
@@ -5981,7 +5896,7 @@
 
 		
 		"AbilityCastRange"				"700"
-		"AbilityCooldown"				"13.0"
+		"AbilityCooldown"				"20.0"
 
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
@@ -7705,197 +7620,8 @@
 			}	
 		}
 	}
-
-	//=================================================================================================================
-	// Recipe: Invisibility Sword
-	//=================================================================================================================
-	"item_recipe_invis_sword"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"ID"							"183"														// unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
-		
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"0"	
-		"ItemShopTags"					""
-		
-		// Recipe
-		//-------------------------------------------------------------------------------------------------------------
-		"ItemRecipe"					"1"
-		"ItemResult"					"item_invis_sword"
-		"ItemRequirements"
-		{
-			"01"						"item_shadow_amulet;item_claymore"
-		}
-	}
 	
-	//=================================================================================================================
-	// Invisibility Sword
-	//=================================================================================================================
-	"item_invis_sword"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"ID"							"152"														// unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
-		"FightRecapLevel"				"1"
-
-		// Stats		
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"28.0"
-		"AbilitySharedCooldown"			"shadow_blade"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"75"
-		"ItemCost"						"2800"
-		"ItemShopTags"					"damage;attack_speed;movespeed;hard_to_tag"
-		"ItemQuality"					"epic"
-		"ItemAliases"					"sb;invis;shadow blade;silver edge"
-		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
-		"ShouldBeSuggested"				"1"
-		
-		// Special	
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"bonus_damage"			"22"
-			}
-			"02"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"bonus_attack_speed"	"30"
-			}
-			"03"
-			{
-				"var_type"				"FIELD_FLOAT"
-				"windwalk_duration"		"14.0"
-			}
-			"04"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"windwalk_movement_speed"	"20"
-			}
-			"05"
-			{
-				"var_type"				"FIELD_FLOAT"
-				"windwalk_fade_time"	"0.3"
-			}
-			"06"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"windwalk_bonus_damage"	"175"
-			}
-		}
-	}
-
-	//=================================================================================================================
-	// Recipe: Silver Edge
-	//=================================================================================================================
-	"item_recipe_silver_edge"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"ID"							"248"														// unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
-		
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"600"	
-		"ItemShopTags"					""
-		
-		// Recipe
-		//-------------------------------------------------------------------------------------------------------------
-		"ItemRecipe"					"1"
-		"ItemResult"					"item_silver_edge"
-		"ItemRequirements"
-		{
-			"01"						"item_invis_sword;item_ultimate_orb"
-		}
-	}
 	
-	//=================================================================================================================
-	// Silver Edge
-	//=================================================================================================================
-	"item_silver_edge"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"ID"							"249"														// unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
-		"FightRecapLevel"				"1"
-
-		// Stats		
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"22.0"
-		"AbilitySharedCooldown"			"shadow_blade"
-
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"75"
-		"ItemCost"						"5550"
-		"ItemShopTags"					"damage;attack_speed;movespeed;hard_to_tag"
-		"ItemQuality"					"epic"
-		"ItemAliases"					"sb;invis;shadow blade"
-		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_ALWAYS"
-		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
-		"ShouldBeSuggested"				"1"
-		
-		// Special	
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"bonus_damage"			"30"
-			}
-			"02"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"bonus_attack_speed"	"30"
-			}
-			"03"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"bonus_all_stats"		"15"
-			}
-			"04"
-			{
-				"var_type"				"FIELD_FLOAT"
-				"windwalk_duration"		"14.0"
-			}
-			"05"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"windwalk_movement_speed"	"25"
-			}
-			"06"
-			{
-				"var_type"				"FIELD_FLOAT"
-				"windwalk_fade_time"	"0.3"
-			}
-			"07"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"windwalk_bonus_damage"	"175"
-			}
-			"08"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"backstab_reduction"	"-50"
-			}
-			"09"
-			{
-				"var_type"				"FIELD_FLOAT"
-				"backstab_duration"		"4"
-			}
-		}
-	}
 
 
 
@@ -11594,6 +11320,23 @@
   		    "SpendCharge"
 			{}
 		}
+
+		"Modifiers"
+		{
+			"modifier_bonus_strength_stackable"
+			{
+				"Passive"			"0"
+				"IsHidden"			"0"
+				"IsDebuff"			"0"
+				"TextureName"	"ogirok_sila"
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT"
+				
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "5"
+				}
+			}
+		}
 	}
 
 	"item_ogirok_agil"
@@ -11640,8 +11383,23 @@
   		    "SpendCharge"
 			{}
 		}
+		"Modifiers"
+		{
+			"modifier_bonus_agility_stackable"
+			{
+				"Passive"			"0"
+				"IsHidden"			"0"
+				"IsDebuff"			"0"
+				"TextureName"	"ogirok_agil"
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT"
+				
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "5"
+				}
+			}
+		}
 	}
-
 	"item_ogirok_int"
 	{
 		// General
@@ -11685,6 +11443,22 @@
 			}
   		    "SpendCharge"
 			{}
+		}
+		"Modifiers"
+		{
+			"modifier_bonus_intellect_stackable"
+			{
+				"Passive"			"0"
+				"IsHidden"			"0"
+				"IsDebuff"			"0"
+				"TextureName"	"ogirok_int"
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT"
+		
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "5"
+				}
+			}
 		}
 	}
 	"item_redbull"
@@ -11897,6 +11671,7 @@
 			"Passive"				"0"
 			"IsHidden"				"0"
 			"Duration"				"%cold_duration"
+			"IsDebuff"				"1"
 			
 			"StatusEffectName"     "particles/status_fx/status_effect_frost.vpcf"
 			"StatusEffectPriority" "10"
@@ -11920,7 +11695,7 @@
 			
 			// Item Info
 			//-------------------------------------------------------------------------------------------------------------
-			"ItemCost"						"1000"	
+			"ItemCost"						"475"	
 			"ItemPurchasable"				"1"
 			"ItemShopTags"					""
 			
@@ -11930,7 +11705,7 @@
 			"ItemResult"					"item_subzero_mask"
 			"ItemRequirements"
 			{
-				"01"						"item_gloves;item_gloves;item_skadi"
+				"01"						"item_gloves;item_gloves;item_skadi_datadriven"
 			}
 	}
 		

@@ -1,6 +1,3 @@
---[[Author: Pizzalol
-	Date: 07.03.2015.
-	Initializes all the needed starting values for the Mystic Snake]]
 function MysticSnakeInitialize( keys )
 	local caster = keys.caster
 	local target = keys.target

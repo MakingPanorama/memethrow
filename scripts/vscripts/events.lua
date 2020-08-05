@@ -5,7 +5,7 @@
 ---------------------------------------------------------------------------
 function COverthrowGameMode:OnGameRulesStateChange()
 	local nNewState = GameRules:State_Get()
-	local rand = RandomFloat(1, 70)
+	local rand = RandomFloat(1, 80)
 	--print( "OnGameRulesStateChange: " .. nNewState )
 
 	if nNewState == DOTA_GAMERULES_STATE_HERO_SELECTION then
@@ -29,27 +29,29 @@ function COverthrowGameMode:OnGameRulesStateChange()
 				EmitGlobalSound("SoundStart6")
 		elseif (rand >60 and rand <= 70) then
 				EmitGlobalSound("SoundStart7")
+		elseif (rand >70 and rand <= 80) then
+				EmitGlobalSound("SoundStart8")
 		end
 		
 		local numberOfPlayers = PlayerResource:GetPlayerCount()
 		if numberOfPlayers > 7 then
 			--self.TEAM_KILLS_TO_WIN = 25
-			nCOUNTDOWNTIMER = 2700
+			nCOUNTDOWNTIMER = 2300
 		elseif numberOfPlayers > 4 and numberOfPlayers <= 7 then
 			--self.TEAM_KILLS_TO_WIN = 20
-			nCOUNTDOWNTIMER = 2700
+			nCOUNTDOWNTIMER = 2000
 		else
 			--self.TEAM_KILLS_TO_WIN = 15
-			nCOUNTDOWNTIMER = 2700
+			nCOUNTDOWNTIMER = 1500
 		end
 		if GetMapName() == "forest_solo" then
-			self.TEAM_KILLS_TO_WIN = 40
+			self.TEAM_KILLS_TO_WIN = 30
 		elseif GetMapName() == "desert_duo" then
-			self.TEAM_KILLS_TO_WIN = 50
+			self.TEAM_KILLS_TO_WIN = 30
 		elseif GetMapName() == "desert_quintet" then
-			self.TEAM_KILLS_TO_WIN = 60
+			self.TEAM_KILLS_TO_WIN = 50
 		elseif GetMapName() == "temple_quartet" then
-			self.TEAM_KILLS_TO_WIN = 70
+			self.TEAM_KILLS_TO_WIN = 60
 		else
 			self.TEAM_KILLS_TO_WIN = 30
 		end
@@ -305,4 +307,29 @@ function COverthrowGameMode:OnNpcGoalReached( event )
 	if npc:GetUnitName() == "npc_dota_treasure_courier" then
 		COverthrowGameMode:TreasureDrop( npc )
 	end
+end
+
+--------------------------------------------------------------------------------
+-- Event: OnHeroLeveled
+--------------------------------------------------------------------------------
+function COverthrowGameMode:OnHeroLeveled( event )
+    local player = EntIndexToHScript(event.player)
+    local level = event.level
+
+    if level and player then
+        local no_point_level = {
+            [17] = 1,
+            [19] = 1,
+            [21] = 1,
+            [22] = 1,
+            [23] = 1,
+            [24] = 1,
+        }
+        local hero = player:GetAssignedHero()
+        if no_point_level[level] or level >= 30 then
+            if hero then
+                hero:SetAbilityPoints(hero:GetAbilityPoints() + 1)
+            end
+        end
+    end
 end

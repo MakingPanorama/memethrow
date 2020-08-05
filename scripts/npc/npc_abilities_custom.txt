@@ -698,7 +698,7 @@
 		"AbilityCooldown"				"1"
 		"AbilityCastPoint"				"0.4"
 		"AbilityCharges"				"3"
-		"AbilityChargeRestoreTime"		"40 35 30 25"
+		"AbilityChargeRestoreTime"		"41 36 31 26"
 
 		// Cost
 		//-------------------------------------------------------------------------------------------------------------
@@ -1284,7 +1284,7 @@
 
 	// Time		
 	//-------------------------------------------------------------------------------------------------------------
-	"AbilityCooldown"				"21 18 15 12"
+	"AbilityCooldown"				"22 19 16 13"
 
 	// Cost
 	//-------------------------------------------------------------------------------------------------------------
@@ -2853,7 +2853,7 @@
 	
 	// Time		
 	//-------------------------------------------------------------------------------------------------------------
-	"AbilityCooldown"				"16 14 12 10"
+	"AbilityCooldown"				"17 15 13 11"
 
 	// Cost
 	//-------------------------------------------------------------------------------------------------------------
@@ -3453,7 +3453,7 @@
 		// Time		
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastRange"				"100"
-		"AbilityCooldown"				"42.5 40 37.5 35"
+		"AbilityCooldown"				"44 41 38 35"
 
 		// Cost
 		//-------------------------------------------------------------------------------------------------------------
@@ -3623,7 +3623,18 @@
 			"Function"			"Damagedeal"
 		
 		}
-			//"SoundKnife"
+
+		"FireSound"
+		{
+			"EffectName"		"SoundKnife"
+			"Target"			"TARGET"
+		}
+
+		"ApplyModifier"
+		{
+			"ModifierName"		"modifier_stifling_dagger_slow_datadriven"
+			"Target"			"TARGET"
+		}
 	}
 
 	"Modifiers"
@@ -4238,7 +4249,7 @@
 		}
 	}
  }
- "sniper_assassinate_lua"
+	"sniper_assassinate_lua"
 {
 	// General
 	//-------------------------------------------------------------------------------------------------------------
@@ -4267,7 +4278,7 @@
 
 	// Damage.
 	//-------------------------------------------------------------------------------------------------------------
-	"AbilityDamage"					"99999999"
+	"AbilityDamage"					"%damage"
 
 	// Cost
 	//-------------------------------------------------------------------------------------------------------------
@@ -4282,8 +4293,6 @@
 	"AbilityCastSoundPhase"	"Sound1" // Sniper Load
 	"AbilityCastSoundLaunch"	"SoundBullet" // Sniper Shot
 	"AbilityCastSoundHit"	"SoundDmg" // Sniper Hited
-
-	"AbilityTest"		"10 20 30 40"
 
 	// Special
 	//-------------------------------------------------------------------------------------------------------------
@@ -4309,6 +4318,11 @@
 		{
 			"var_type"					"FIELD_FLOAT"
 			"debuff_duration"			"4.0"
+		}
+		"05"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"damage"					"99999999"
 		}
 	}
 	
@@ -5404,6 +5418,12 @@
 			"EffectAttachType"  "follow_origin"
 			"Target"            "TARGET"
 		}
+
+		"RunScript"
+		{
+			"ScriptFile"				"ability\chaos_bolt.lua"
+			"Function"					"FaithDamage"
+		}
 	}
 }
 
@@ -5440,17 +5460,27 @@
 		"01"
 		{
 			"var_type"					"FIELD_FLOAT"
-			"gold_gain_min" 			"-200 -500 -750"
+			"gold_gain_min" 			"-250 -500 -750 -1000"
 		}
 		"02"
 		{
 			"var_type"					"FIELD_FLOAT"
-			"gold_gain_max" 			"500 1000 1500"
+			"gold_gain_max" 			"500 1000 1500 2000"
 		}
 		"03"
 		{
 			"var_type"					"FIELD_FLOAT"
-			"jackpot_chance" 			"1"
+			"gold_gain_max_talent" 		"1000 1500 2000 2500"
+		}
+		"04"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"jackpot_scepter" 			"1"
+		}
+		"05"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"jackpot_talent" 			"1"
 		}
 	}
 	
@@ -5474,7 +5504,49 @@
 	}	
 
   }
-	
+	"special_bonus_unique_ogre_magi_2"	// +500 к макс выгрышу
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"					"6707"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"value"						"1"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ability: Special Bonus
+	//=================================================================================================================
+	"special_bonus_unique_ogre_magi_3" // +1% к шансу джекпота
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"					"7030"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"chance"				"50"
+			}
+		}
+	}
+	// Игральные кубики
   "chaos_bolt_datadriven"
 {
 	// General
@@ -5505,7 +5577,7 @@
 	
 	// Time		
 	//-------------------------------------------------------------------------------------------------------------
-	"AbilityCooldown"				"14"
+	"AbilityCooldown"				"15"
 
 	// Cost
 	//-------------------------------------------------------------------------------------------------------------
@@ -5538,7 +5610,7 @@
 		"05"
 		{
 			"var_type"				"FIELD_INTEGER"
-			"damage_max"			"200 350 500 750"
+			"damage_max"			"300 400 500 600"
 		}
 	}
 
@@ -6647,7 +6719,7 @@
   		//-------------------------------------------------------------------------------------------------------------------
 		
   		"AbilityManaCost"				"90"
-		"AbilityCooldown"				"17 15 13 11"
+		"AbilityCooldown"				"18 16 14 12"
   		// Time Cast
   		//-------------------------------------------------------------------------------------------------------------------
 
@@ -6734,21 +6806,159 @@
 			}
 		}
 	}
-	//
-	/// Russian Sergey What is this word?! (Что это за слово?!)
-	//////
-	"russian_sergey_what_is_this_word"
+	"russian_sergey_home"
+{
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+	"BaseClass"					"ability_lua"
+	"ScriptFile"					"ability/russian_sergey.lua"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+	"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO | DOTA_UNIT_TARGET_FLAG_DEAD"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	"FightRecapLevel"				"1"
+	"AbilityTextureName"			"serega1"
+	
+	// Casting
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityCastPoint"				"0.5"
+
+	// Time		
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityCooldown"				"60 55 50 45"
+
+	// Cost
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityManaCost"				"100"
+	
+	// Cast Range
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityCastRange"				"600 700 800 900"
+
+	// Custom
+	//-------------------------------------------------------------------------------------------------------------
+	// This keyvalues using through LoadKeyValues in Lua
+	"AbilityCastSound"				"SoundDomoy" 
+
+	// Special
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilitySpecial"
+	{
+		//"01"
+		//{
+		//	"var_type"					"FIELD_FLOAT"
+		//	"backtrack_time"			"99999"
+		//}
+		"01" // 02
+		{
+			"var_type"					"FIELD_INTEGER"
+			"cast_range"				"600 700 800 900"
+		}
+		"02" // 03
+		{
+			"var_type"					"FIELD_INTEGER"
+			"projectile_speed"			"8000"
+		}
+		//"04"
+		//{
+		//	"var_type"					"FIELD_FLOAT"
+		//	"delay"						"0.03"
+		//}
+		//"05"
+		//{
+		//	"var_type"					"FIELD_INTEGER"
+		//	"vision_radius"				"0"
+		//}
+		//"06"
+		//{
+		//	"var_type"					"FIELD_FLOAT"
+		//	"vision_duration"			"0"
+		//}
+		//"07"
+		//{
+		//	"var_type" "FIELD_INTEGER"
+		//	"global_radius" "100000"
+		//}
+	} 
+  }
+  	"sergey_heal"
+  {
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+	"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+	"FightRecapLevel"				"1"
+	"AbilityTextureName"			"serega2"
+	"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
+	
+	// Casting
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityCastPoint"				"0.3"
+
+	// Time		
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityCooldown"				"18 17 16 15"
+
+	// Cost
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityManaCost"				"100"
+	
+	// Cast Range
+	//-------------------------------------------------------------------------------------------------------------
+
+	// Special
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"heal_tooltip"						"20 25 30 35"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"heal_scepter_tooltip"				"100"
+			"RequiresScepter"				"1"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"heal"						"0.20 0.25 0.30 0.35"
+		}
+		"04"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"heal_scepter"				"1"
+		}
+	} 
+
+	"OnSpellStart"
+	{
+		"RunScript"
+		{
+			"ScriptFile"	"ability/serega.lua"
+			"Function"		"Heal"
+		}
+	}
+	
+  }
+  	"russian_sergey_what_is_this_word"
 	{
 		"BaseClass"             		"ability_lua"
-		"ScriptFile"					"ability/russian_sergey.lua"
-		"AbilityTextureName"			"ability_name"
+		"ScriptFile"					"ability/serega.lua"
+		"AbilityTextureName"			"serega4"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
-		"MaxLevel" 						"4"
+		"MaxLevel" 						"3"
 
-		"AbilityCooldown"				"18.0 14.0 12.0 10.0"
+		"AbilityCooldown"				"15 12.5 10"
 
-		"AbilityCastSound"				"Hero_Sergey.WhatIsThisWord" // Enter your sound for this ability 
+		"AbilityCastSound"				"SounChtoetozaslovo" // Enter your sound for this ability 
 
 		"HasScepterUpgrade"				"1"
 
@@ -6756,13 +6966,377 @@
 		{
 			"01"
 			{
-				"var_type"			"FIELD_INTEGER"
-				"magic_resistance"			"10 20 30 40"
+				"var_type"					"FIELD_INTEGER"
+				"magic_resistance"			"20 30 40"
+			}
+		}
+	}
+	"serega_vsego_horoshego"
+	{
+			// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityTextureName"			"serega3"
+		"AOERadius"						"%radius"
+		"HasScepterUpgrade"				"1"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"			"soundevents/serega.vsndevts"
+			"particle"			"particles/units/heroes/hero_axe/axe_attack_blur_counterhelix.vpcf"
+		}
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.1"
+		
+		// Damage.
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityDamage"					"%damage"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"triger_chance"			"12.5 15 17.5 20"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"trigger_chance_talent"		"17.5 20 22.5 25"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"cooldown"					"0.1"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration_fear"					"0.75"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration_scepter"			"2"
+				"RequiresScepter"			"1"
+			}
+			"06"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"damage"					"100 150 200 250"
+			}
+			"07"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration_fear_tooltip"					"0.75"
+			}
+			
+		}
+
+		"Modifiers"
+		{
+			"modifier_vsego_horoshego"
+			{
+				"Passive"			"1"
+				"IsHidden"			"1"
+		
+				"OnAttacked"
+				{
+					"RunScript"
+					{
+						"ScriptFile"		"ability/serega.lua"
+						"Function"			"Von"
+					}
+				}				
+			}
+		}
+		
+		
+	}
+	"special_bonus_unique_silencer_2" // +2.5 % chance
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"					"6878"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"value"				"2"
+				"ad_linked_ability"			"silencer_glaives_of_wisdom"				// this is the ability this bonus affects.  This line is required for Ability Draft to correctly choose talents.
 			}
 		}
 	}
 
+	//=================================================================================================================
+	// Ability: Special Bonus
+	//=================================================================================================================
+	"special_bonus_unique_silencer_3" // 2 sec duration
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"					"6879"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"value"				"15"
+				"ad_linked_ability"			"silencer_glaives_of_wisdom"				// this is the ability this bonus affects.  This line is required for Ability Draft to correctly choose talents.
+			}
+		}
+	}
+	"sergey_krik"
+{
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+	"BaseClass"				"ability_datadriven"
+	"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"		
+	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+	"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+	"FightRecapLevel"				"2"
+	"AbilityTextureName"			"serega5"
+	"LinkedAbility"					"glimpse_datadriven"
+	"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_4"
+
+	// Casting
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityCastPoint"				"0.5"
+
+	// Time		
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityCooldown"				"29 26 23 20"
+
+	// Cost
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityManaCost"				"120 140 160 180"		
+	
+	// Cast Range
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityCastRange"				"700"
+
+	// Stats
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityModifierSupportValue"	"0.6"	// Applies multiple modifiers
+	"AbilityDamage"					"%damage"
+
+	
+	// Special
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"duration"					"1 1.5 2 2.5"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"damage"					"150 200 250 300"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"side_damage"				"0"
+		}
+		"04"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"damage_radius"				"300"
+		}
+		"05"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"slow_movement_speed_pct"	"-50"
+		}
+		"06"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"slow_attack_speed_pct"		"-50"
+		}
+		"07"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"push_distance"				"300"
+		}
+		"08"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"push_duration"				"0.6"
+		}
+		"09"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"slow_duration"				"4"
+		}
+		"10"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"cast_range_scepter"		"950 950 950"
+		}
+		"11"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"cooldown_scepter"			"45.0 45.0 45.0"
+		}
+		// Extra
+		"12"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"cast_range"				"700"
+		}
+	}
+
+	"precache"
+	{
+		"particle"  "particles/units/heroes/hero_beastmaster/beastmaster_primal_roar.vpcf"
+		"particle"  "particles/units/heroes/hero_beastmaster/beastmaster_primal_target.vpcf"
+		"soundfile" "soundevents/serega.vsndevts"
+	}
+
+	"OnSpellStart"
+	{
+		"RunScript"
+		{
+			"ScriptFile"	"ability/serega.lua"
+			"Function" 		"RandomSound"
+		}
+
+		"FireEffect"
+		{
+			"EffectName"        "particles/units/heroes/hero_beastmaster/beastmaster_primal_roar.vpcf"
+			"EffectAttachType"  "start_at_customorigin"
+			"Target"            "TARGET"
+			"ControlPointEntities"
+			{
+				"CASTER"	"attach_cast4_primal_roar"
+				"TARGET"	"attach_hitloc"
+			}
+		}
+		"RunScript"
+		{
+			"ScriptFile"	"ability/serega.lua"
+			"Function"		"Start"
+		}
+
+		"ActOnTargets"
+		{
+			"Target"
+			{
+				"Center"  	"TARGET"
+				"Line"
+				{
+					"Length" 		"%cast_range"
+					"Thickness" 	"%damage_radius"
+				}
+				"Teams" 	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"Types" 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+			}
+			
+			// Causes the primary target to be knocked back as well
+			"Action"    
+			{
+				"Knockback"
+				{
+					"Target"            "TARGET"
+					"Center" 	        "UNIT"
+					"Distance"	        "%push_distance"
+					"Duration"	        "%push_duration"
+					"Height"	        "0"
+					"IsFixedDistance"	"0"
+					"ShouldStun"        "0"	
+				}
+
+				"ApplyModifier"
+				{
+					"ModifierName"	"modifier_primal_roar_slow"
+					"Target" 		"TARGET"
+					"Duration"		"%slow_duration"
+				}
+			}
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_primal_roar_stun"
+		{
+			"IsDebuff"		"1"
+			"EffectName"	"particles/generic_gameplay/generic_stunned.vpcf"
+			"EffectAttachType"	"follow_overhead"
+			"OverrideAnimation"	"ACT_DOTA_DISABLED"
+			"Duration"		"%duration"
+			"States"
+			{
+				"MODIFIER_STATE_STUNNED"	"MODIFIER_STATE_VALUE_ENABLED"
+			}
+		}
+
+		"modifier_primal_roar_slow"
+		{
+			"IsDebuff"		"1"
+			"IsPurgable"		"0"
+			"Duration"		"%slow_duration"
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%slow_attack_speed_pct"
+				"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%slow_movement_speed_pct" 
+			}
+		}
+	}
+  }
+	"special_bonus_unique_silencer_4" // Pure damage чистый урон от быкануть
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"					"6880"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"value"				"1.5"
+				"ad_linked_ability"			"silencer_global_silence"				// this is the ability this bonus affects.  This line is required for Ability Draft to correctly choose talents.
+			}
+		}
+	}
+		
+
+
+
+
 }
+
 	
 
 

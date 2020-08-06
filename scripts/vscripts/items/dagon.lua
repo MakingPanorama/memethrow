@@ -2,7 +2,7 @@ function Dagon( keys )
 	local caster = keys.caster
 	local target = keys.target
 	local ability = keys.ability
-
+	local particle = "particles/item/dagon/dagon.vpcf"
 	local damage = ability:GetSpecialValueFor("damage_tooltip")
 
 	local dagon_pfx = ParticleManager:CreateParticle(particle, PATTACH_RENDERORIGIN_FOLLOW, source)

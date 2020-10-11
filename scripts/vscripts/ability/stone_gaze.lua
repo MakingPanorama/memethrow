@@ -50,7 +50,32 @@ function StoneGaze( keys )
 	local angle = math.abs(RotationDelta((VectorToAngles(direction)), VectorToAngles(forward_vector)).y)
 	--print("Angle: " .. angle)
 
-	ability:ApplyDataDrivenModifier(caster, target, modifier_facing, {Duration = 0.06})
+	-- Facing check
+	if angle <= vision_cone/2 then
+		local check = false
+		-- Check if its a target from before
+		for _,v in ipairs(caster.stone_gaze_table) do
+			if v == target then
+				check = true
+			end
+		end
+
+		-- If its a target from before then apply the counter modifier for 2 frames
+		if check then
+			ability:ApplyDataDrivenModifier(caster, target, modifier_facing, {Duration = 0.06})
+		else
+			-- If its a new target then add it to the table
+			table.insert(caster.stone_gaze_table, target)
+			-- Set the facing time to 0
+			target.stone_gaze_look = 0
+			-- Set the petrification variable to false
+			target.stone_gaze_stoned = false
+
+			-- Apply the slow and counter modifiers
+			ability:ApplyDataDrivenModifier(caster, target, modifier_slow, {Duration = duration})
+			ability:ApplyDataDrivenModifier(caster, target, modifier_facing, {Duration = 0.06})
+		end
+	end
 end
 
 --[[Author: Pizzalol
@@ -69,9 +94,12 @@ function StoneGazeFacing( keys )
 	local stone_duration = ability:GetLevelSpecialValueFor("stone_duration", ability_level)
 	local modifier_stone = keys.modifier_stone
 
+	target.stone_gaze_look = target.stone_gaze_look + 0.03
 
 	-- If the target was facing the caster for more than the required time and wasnt petrified before
 	-- then petrify it
+	if target.stone_gaze_look >= face_duration and not target.stone_gaze_stoned then
 		ability:ApplyDataDrivenModifier(caster, target, modifier_stone, {Duration = stone_duration})
 		target.stone_gaze_stoned = true
+	end
 end

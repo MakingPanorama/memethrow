@@ -1,11 +1,13 @@
-LinkLuaModifier("modifier_screamed_custom", "modifiers/modifier_screamed_custom.lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_blue_man","modifiers/modifier_black_man.lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_green_man","modifiers/modifier_black_man.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_fountain_ultimate","modifiers/modifier_fountain_ultimate.lua", LUA_MODIFIER_MOTION_NONE)
 
+LinkLuaModifier("modifier_screamed_custom", "modifiers/modifier_screamed_custom.lua", LUA_MODIFIER_MOTION_NONE)
 --[[
 Overthrow Game Mode
 ]]
-
+_G.iMinimumScale = 300
+_G.iMaximumScale = 15000 
 _G.nNEUTRAL_TEAM = 4
 _G.nCOUNTDOWNTIMER = 901
 
@@ -25,8 +27,7 @@ require( "events" )
 require( "items" )
 require( "utility_functions" )
 require( "timers" )
-require('utils/util')
-
+require( "internal/util" )
 ---------------------------------------------------------------------------
 -- Precache
 ---------------------------------------------------------------------------
@@ -49,7 +50,7 @@ function Precache( context )
         PrecacheModel( "npc_dota_treasure_courier", context )
 		PrecacheResource( "model", "models/courier/frog/frog.vmdl", context)
 		PrecacheResource( "model", "models/items/courier/gama_brothers/gama_brothers.vmdl", context)
-
+		PrecacheResource(  "particle_folder", "particles/econ", handle_3)
     --Cache new particles
        	PrecacheResource( "particle", "particles/econ/events/nexon_hero_compendium_2014/teleport_end_nexon_hero_cp_2014.vpcf", context )
        	PrecacheResource( "particle", "particles/leader/leader_overhead.vpcf", context )
@@ -74,24 +75,19 @@ function Precache( context )
 		PrecacheResource( "particle", "particles/phase_boots.vpcf", context )
 		PrecacheResource( "particle", "particles/cp_fire_green.vpcf", context )
 		PrecacheResource( "particle", "particles/cp_fire_blue.vpcf", context )
-		PrecacheResource( "particle", "particles/omniknight_degen_aura_debuff.vpcf", context )
-		PrecacheResource( "particle", "particles/queen_scream_of_pain_owner.vpcf", context )
-		PrecacheResource( "particle", "particles/units/heroes/hero_omniknight/omniknight_guardian_angel_omni.vpcf", context )
-		PrecacheResource( "particle", "particles/omniknight_guardian_angel_wings.vpcf", context )
-		PrecacheResource( "particle", "particles/status_fx/status_effect_frost_lich.vpcf", context )
-		PrecacheResource( "particle", "particles/units/heroes/hero_crystalmaiden/maiden_frostbite_buff.vpcf", context )
-		PrecacheResource( "particle", "particles/generic_gameplay/generic_slowed_cold.vpcf", context )
-		PrecacheResource( "particle", "particles/units/heroes/hero_crystalmaiden/maiden_frostbite.vpcf", context )
-		
        	
 	--Cache particles for traps
 		PrecacheResource( "particle_folder", "particles/units/heroes/hero_dragon_knight", context )
 		PrecacheResource( "particle_folder", "particles/units/heroes/hero_venomancer", context )
 		PrecacheResource( "particle_folder", "particles/units/heroes/hero_axe", context )
 		PrecacheResource( "particle_folder", "particles/units/heroes/hero_life_stealer", context )
+		PrecacheResource( "particle_folder", "particles/generic_gameplay", handle_3)
 		
 
-	--Cache sounds for traps
+	--Cache sounds for traps\
+		PrecacheResource( "soundfile", "soundevents/heroes/sonic.vsndevts", context)
+		PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_faceless_void.vsndevts", context)
+		PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_lina.vsndevts", context)
 		PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/soundevents_conquest.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/bomj_euu.vsndevts", context )
@@ -127,18 +123,6 @@ function Precache( context )
 		PrecacheResource( "soundfile", "soundevents/gamestart.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/casino.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/bomj_zareju.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/z_coco.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/scorpion_crush.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/kriki.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/z_ogirok.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/shrek.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/z_redbull.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/z_razgon.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/sonic.vsndevts", context)
-		PrecacheResource( "soundfile", "soundevents/items.vsndevts", context)
-		PrecacheResource( "soundfile", "soundevents/serega.vsndevts", context)
-		PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_batrider.vsndevts", context)
-		
 end
 
 function Activate()
@@ -164,9 +148,6 @@ function COverthrowGameMode:InitGameMode()
 	
 --	CustomNetTables:SetTableValue( "test", "value 1", {} );
 --	CustomNetTables:SetTableValue( "test", "value 2", { a = 1, b = 2 } );
-	
-	GameRules:GetGameModeEntity():SetDaynightCycleDisabled( false )
-	GameRules:SetTimeOfDay( 59.9 )
 
 	self.m_TeamColors = {}
 	self.m_TeamColors[DOTA_TEAM_GOODGUYS] = { 61, 210, 150 }	--		Teal
@@ -202,7 +183,7 @@ function COverthrowGameMode:InitGameMode()
 	self.m_GatheredShuffledTeams = {}
 	self.numSpawnCamps = 5
 	self.specialItem = ""
-	self.spawnTime = 90
+	self.spawnTime = 120
 	self.nNextSpawnItemNumber = 1
 	self.hasWarnedSpawn = false
 	self.allSpawned = false
@@ -265,16 +246,18 @@ function COverthrowGameMode:InitGameMode()
 	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_HASTE, true ) --Haste
 	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_ILLUSION, true ) --Illusion
 	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_INVISIBILITY, true ) --Invis
-	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_REGENERATION, false ) --Regen
+	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_REGENERATION, true ) --Regen
 	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_ARCANE, true ) --Arcane
 	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_BOUNTY, true ) --Bounty
 	GameRules:GetGameModeEntity():SetLoseGoldOnDeath( false )
 	GameRules:GetGameModeEntity():SetFountainPercentageHealthRegen( 100 )
 	GameRules:GetGameModeEntity():SetFountainPercentageManaRegen( 100 )
 	GameRules:GetGameModeEntity():SetFountainConstantManaRegen( 0 )
+	GameRules:GetGameModeEntity():SetMaximumAttackSpeed( 2000 )
 	GameRules:GetGameModeEntity():SetBountyRunePickupFilter( Dynamic_Wrap( COverthrowGameMode, "BountyRunePickupFilter" ), self )
 	GameRules:GetGameModeEntity():SetExecuteOrderFilter( Dynamic_Wrap( COverthrowGameMode, "ExecuteOrderFilter" ), self )
-
+	GameRules:GetGameModeEntity():SetDaynightCycleDisabled( false )
+	GameRules:SetTimeOfDay( 0.00009 )
 
 	ListenToGameEvent( "game_rules_state_change", Dynamic_Wrap( COverthrowGameMode, 'OnGameRulesStateChange' ), self )
 	ListenToGameEvent( "npc_spawned", Dynamic_Wrap( COverthrowGameMode, "OnNPCSpawned" ), self )
@@ -282,7 +265,6 @@ function COverthrowGameMode:InitGameMode()
 	ListenToGameEvent( "entity_killed", Dynamic_Wrap( COverthrowGameMode, 'OnEntityKilled' ), self )
 	ListenToGameEvent( "dota_item_picked_up", Dynamic_Wrap( COverthrowGameMode, "OnItemPickUp"), self )
 	ListenToGameEvent( "dota_npc_goal_reached", Dynamic_Wrap( COverthrowGameMode, "OnNpcGoalReached" ), self )
-	ListenToGameEvent("dota_player_gained_level", Dynamic_Wrap(COverthrowGameMode, 'OnHeroLeveled'), self)
 
 	Convars:RegisterCommand( "overthrow_force_item_drop", function(...) self:ForceSpawnItem() end, "Force an item drop.", FCVAR_CHEAT )
 	Convars:RegisterCommand( "overthrow_force_gold_drop", function(...) self:ForceSpawnGold() end, "Force gold drop.", FCVAR_CHEAT )
@@ -317,6 +299,7 @@ function COverthrowGameMode:SetUpFountains()
 	for _,fountainEnt in pairs( fountainEntities ) do
 		--print("fountain unit " .. tostring( fountainEnt ) )
 		fountainEnt:AddNewModifier( fountainEnt, fountainEnt, "modifier_fountain_aura_lua", {} )
+		fountainEnt:AddNewModifier(  fountainEnt, fountainEnt, "modifier_fountain_ultimate", {})
 	end
 end
 

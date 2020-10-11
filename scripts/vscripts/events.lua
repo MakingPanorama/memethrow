@@ -5,7 +5,7 @@
 ---------------------------------------------------------------------------
 function COverthrowGameMode:OnGameRulesStateChange()
 	local nNewState = GameRules:State_Get()
-	local rand = RandomFloat(1, 80)
+	local rand = RandomFloat(1, 70)
 	--print( "OnGameRulesStateChange: " .. nNewState )
 
 	if nNewState == DOTA_GAMERULES_STATE_HERO_SELECTION then
@@ -29,9 +29,17 @@ function COverthrowGameMode:OnGameRulesStateChange()
 				EmitGlobalSound("SoundStart6")
 		elseif (rand >60 and rand <= 70) then
 				EmitGlobalSound("SoundStart7")
-		elseif (rand >70 and rand <= 80) then
-				EmitGlobalSound("SoundStart8")
 		end
+		local sphere = ParticleManager:CreateParticle("particles/alchemist_acid_spray.vpcf", PATTACH_POINT, nil)
+		ParticleManager:SetParticleControl(sphere, PATTACH_POINT, Vector(iMaximumScale,iMaximumScale,0)) -- size of the sphere x, y.
+		Timers:CreateTimer(function() -- Download Barabones Timer. If you not have.
+		ParticleManager:SetParticleControl(sphere, PATTACH_POINT, Vector(iMaximumScale - 50,iMaximumScale - 50, 0)) -- Subtract Sphere.
+		
+		if iMaximumScale < iMinimumScale then
+			return nil
+		end
+		return 5
+	end)
 		
 		local numberOfPlayers = PlayerResource:GetPlayerCount()
 		if numberOfPlayers > 7 then
@@ -72,47 +80,9 @@ function COverthrowGameMode:OnGameRulesStateChange()
 end
 
 --------------------------------------------------------------------------------
--- Event: OnNPCSpawned + скины
+-- Event: OnNPCSpawned
 --------------------------------------------------------------------------------
 function COverthrowGameMode:OnNPCSpawned( event )
-	local spawnedUnit = EntIndexToHScript( event.entindex )
-	local hero = EntIndexToHScript(event.entindex)
-	if hero:GetUnitName() == "npc_dota_hero_juggernaut" then
-           SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/juggernaut/generic_wep_broadsword.vmdl"}):FollowEntity(hero, true)
-		   SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/juggernaut/bladesrunner_back/bladesrunner_back.vmdl"}):FollowEntity(hero, true)
-		   SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/juggernaut/arcana/juggernaut_arcana_mask.vmdl"}):FollowEntity(hero, true)
-		   SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/juggernaut/bladesrunner_legs/bladesrunner_legs.vmdl"}):FollowEntity(hero, true)
-		   SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/heroes/juggernaut/juggernaut_arcana.vmdl"}):FollowEntity(hero, true)
-	end
-	if hero:GetUnitName() == "npc_dota_hero_phantom_assassin" then
-           SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/phantom_assassin/creeping_shadow_back/creeping_shadow_back.vmdl"}):FollowEntity(hero, true)
-		   SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/phantom_assassin/creeping_shadow_belt/creeping_shadow_belt.vmdl"}):FollowEntity(hero, true)
-		   SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/phantom_assassin/creeping_shadow_head/creeping_shadow_head.vmdl"}):FollowEntity(hero, true)
-		   SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/phantom_assassin/creeping_shadow_shoulder/creeping_shadow_shoulder.vmdl"}):FollowEntity(hero, true)
-		   SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/phantom_assassin/creeping_shadow_weapon/creeping_shadow_weapon.vmdl"}):FollowEntity(hero, true)
-	end
-	if spawnedUnit:IsRealHero() then
-		-- Destroys the last hit effects
-		local deathEffects = spawnedUnit:Attribute_GetIntValue( "effectsID", -1 )
-		if deathEffects ~= -1 then
-			ParticleManager:DestroyParticle( deathEffects, true )
-			spawnedUnit:DeleteAttribute( "effectsID" )
-		end
-		if self.allSpawned == false then
-			if GetMapName() == "mines_trio" then
-				--print("mines_trio is the map")
-				--print("self.allSpawned is " .. tostring(self.allSpawned) )
-				local unitTeam = spawnedUnit:GetTeam()
-				local particleSpawn = ParticleManager:CreateParticleForTeam( "particles/addons_gameplay/player_deferred_light.vpcf", PATTACH_ABSORIGIN, spawnedUnit, unitTeam )
-				ParticleManager:SetParticleControlEnt( particleSpawn, PATTACH_ABSORIGIN, spawnedUnit, PATTACH_ABSORIGIN, "attach_origin", spawnedUnit:GetAbsOrigin(), true )
-			end
-		end
-	end
-end
-
-
-
---[[function COverthrowGameMode:OnNPCSpawned( event )
 	local spawnedUnit = EntIndexToHScript( event.entindex )
 	if spawnedUnit:IsRealHero() or spawnedUnit:IsIllusion() then
 		-- Destroys the last hit effects
@@ -142,15 +112,14 @@ end
 			print("Test " ..tostring(PlayerResource:GetSteamID(0)))
 		end
 	end
-
-end ]]
+end
 
 --------------------------------------------------------------------------------
 -- Event: BountyRunePickupFilter
 --------------------------------------------------------------------------------
 function COverthrowGameMode:BountyRunePickupFilter( filterTable )
-      filterTable["xp_bounty"] = 2*filterTable["xp_bounty"]
-      filterTable["gold_bounty"] = 2*filterTable["gold_bounty"]
+      filterTable["xp_bounty"] = 3*filterTable["xp_bounty"]
+      filterTable["gold_bounty"] = 3*filterTable["gold_bounty"]
       return true
 end
 
@@ -307,29 +276,4 @@ function COverthrowGameMode:OnNpcGoalReached( event )
 	if npc:GetUnitName() == "npc_dota_treasure_courier" then
 		COverthrowGameMode:TreasureDrop( npc )
 	end
-end
-
---------------------------------------------------------------------------------
--- Event: OnHeroLeveled
---------------------------------------------------------------------------------
-function COverthrowGameMode:OnHeroLeveled( event )
-    local player = EntIndexToHScript(event.player)
-    local level = event.level
-
-    if level and player then
-        local no_point_level = {
-            [17] = 1,
-            [19] = 1,
-            [21] = 1,
-            [22] = 1,
-            [23] = 1,
-            [24] = 1,
-        }
-        local hero = player:GetAssignedHero()
-        if no_point_level[level] or level >= 30 then
-            if hero then
-                hero:SetAbilityPoints(hero:GetAbilityPoints() + 1)
-            end
-        end
-    end
 end

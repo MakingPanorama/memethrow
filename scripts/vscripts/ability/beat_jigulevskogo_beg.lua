@@ -7,7 +7,7 @@ function ExtraData( keys )
 
 	ability.target = target
 	ability.traveled_distance = 0
-	ability.speed_traveling = 1800 * 1/30
+	ability.speed_traveling = 2800 * 1/30
 	ability.z = 0 
 	ability.initial_distance = (GetGroundPosition(target:GetAbsOrigin(), target)-GetGroundPosition(caster:GetAbsOrigin(), caster)):Length2D()
 	ability.move = keys.target:GetOrigin() 

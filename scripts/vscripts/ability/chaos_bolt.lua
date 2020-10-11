@@ -3,7 +3,6 @@ function FaithSound ( keys )
 	local caster = keys.caster
 	local rand = math.random(1, 60)
 	
-	
 	if (rand >=1 and rand <= 20) then
 			caster:EmitSound("SoundRotCasino")
 	elseif (rand >20 and rand <= 40) then
@@ -13,31 +12,6 @@ function FaithSound ( keys )
 	end
 
 end	
-
-function FaithDamage ( keys)
-	
-	local caster = keys.caster
-	local target = keys.target
-	local ability = keys.ability
-	local damage_min = ability:GetLevelSpecialValueFor("damage_min", ability:GetLevel() -1)
-	local damage_max = ability:GetLevelSpecialValueFor("damage_max", ability:GetLevel() -1)
-
-	if target:TriggerSpellAbsorb( keys.ability ) then return end
-			
-	local random = RandomFloat(0, 1)
-	local damage = damage_min + (damage_max - damage_min) * (1 - random)
-
-
-	local damage_table = {}
-	damage_table.attacker = caster
-	damage_table.victim = target
-	damage_table.ability = ability
-	damage_table.damage_type = ability:GetAbilityDamageType()
-	damage_table.damage = damage
-
-	ApplyDamage(damage_table)
-
-end
 
 function RandomSound ( keys )
 	local caster = keys.caster
@@ -72,8 +46,6 @@ function ChaosBolt( keys )
 	local damage_min = ability:GetLevelSpecialValueFor("damage_min", ability_level) 
 	local damage_max = ability:GetLevelSpecialValueFor("damage_max", ability_level)
 	local chaos_bolt_particle = keys.chaos_bolt_particle
-
-	if target:TriggerSpellAbsorb( ability ) then return end
 
 	-- Calculate the stun and damage values
 	local random = RandomFloat(0, 1)

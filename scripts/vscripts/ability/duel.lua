@@ -1,3 +1,9 @@
+--[[ ============================================================================================================
+	Author: Hewdraw
+	Date: June 11, 2015
+	Called when Duel is cast.  Begins the duel.
+	Additional parameters: keys.Duration
+================================================================================================================= ]]
 function legion_commander_duel_datadriven_on_spell_start(keys)
 	local caster = keys.caster
 	local caster_origin = caster:GetAbsOrigin()
@@ -6,8 +12,6 @@ function legion_commander_duel_datadriven_on_spell_start(keys)
 	local ability = keys.ability
 	local modifier_duel = "modifier_duel_datadriven"
 	
-	if target:TriggerSpellAbsorb( ability ) then return end
-
 	caster:EmitSound("Hero_LegionCommander.Duel.Cast")
 	caster:EmitSound("SoundDuel")
 	EmitGlobalSound("SoundFight")

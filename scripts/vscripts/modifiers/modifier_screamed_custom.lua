@@ -1,6 +1,6 @@
 modifier_screamed_custom = modifier_screamed_custom or class({})
 
-function modifier_screamed_custom:IsHidden() return false end function modifier_screamed_custom:IsPassive() return false end function modifier_screamed_custom:IsPurgable() return true end
+function modifier_screamed_custom:IsHidden() return true end function modifier_screamed_custom:IsPassive() return false end function modifier_screamed_custom:IsPurgable() return true end
 
 function modifier_screamed_custom:OnCreated()
 	if not IsServer() then return end
@@ -37,9 +37,17 @@ function modifier_screamed_custom:CheckState()
 	}
 end
 
+function modifier_screamed_custom:DeclareFunctions()
+	return {
+		MODIFIER_PROPERTY_MOVESPEED_ABSOLUTE
+	}
+end
 
 function modifier_screamed_custom:OnDestroy()
 	if not IsServer() then return end
 	self:GetParent():Stop()
 end
 
+function modifier_screamed_custom:GetModifierMoveSpeed_Absolute()
+	return 550
+end

@@ -165,15 +165,6 @@
 	"item_recipe_hurricane_pike"			"REMOVE"
 	"item_hurricane_pike"				"REMOVE"
 	"item_courier"					"REMOVE"
-	"item_trident"					"REMOVE"
-	"item_recipe_trident"			"REMOVE"
-	"item_bottle"					"REMOVE"
-	"item_phase_boots"				"REMOVE"
-	"item_skadi"					"REMOVE"
-	"item_helm_of_the_dominator"	"REMOVE"
-	"item_vladmir"					"REMOVE"
-	"item_veil_of_discord"			"REMOVE"
-	"item_glimmer_cape"				"REMOVE"
 	
 	//New items
 	"item_sange_datadriven"
@@ -208,6 +199,10 @@
 	{
 		"ItemPurchasable"				"1"
 	}
+	"item_courier"
+	{
+		"ItemPurchasable"				"1"
+	}
 	"item_stout_shield"
 	{
 		"ItemPurchasable"				"1"
@@ -224,15 +219,23 @@
 	{
 		"ItemPurchasable"				"1"
 	}
-	"item_recipe_double_desol_datadriven"
+	"item_recipe_duo_sange_datadriven"
 	{
 		"ItemPurchasable"				"1"
 	}
-	"item_double_desol_datadriven"
+	"item_desolator_2"
 	{
 		"ItemPurchasable"				"1"
 	}
 	"item_recipe_desolator_2"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_recipe_trident"
+	{
+		"ItemPurchasable"				"1"
+	}
+	"item_trident"
 	{
 		"ItemPurchasable"				"1"
 	}
@@ -276,11 +279,11 @@
 	{
 		"ItemPurchasable"				"1"
 	}
-	"item_recipe_blade_of_fury_datadriven"
+	"item_recipe_bfury_datadriven"
 	{
 		"ItemPurchasable"				"1"
 	}
-	"item_blade_of_fury_datadriven"
+	"item_bfury_datadriven"
 	{
 		"ItemPurchasable"				"1"
 	}
@@ -292,66 +295,5 @@
 	{
 		"ItemPurchasable"				"1"
 	}
-	"item_kokain_datadriven"
-	{
-		"ItemPurchasable"				"1"
-	}
-	"item_recipe_gamnodavi_datadriven"
-	{
-		"ItemPurchasable"				"1"
-	}
-	"item_gamnodavi_datadriven"
-	{
-		"ItemPurchasable"				"1"
-	}
-	"item_ogirok_sila"
-	{
-		"ItemPurchasable"				"1"
-	}
-	"item_ogirok_agil"
-	{
-		"ItemPurchasable"				"1"
-	}
-	"item_ogirok_int"
-	{
-		"ItemPurchasable"				"1"
-	}
-	"item_redbull"
-	{
-		"ItemPurchasable"				"1"
-	}
-	"item_recipe_nike"
-	{
-		"ItemPurchasable"				"1"
-	}
-	"item_nike"
-	{
-		"ItemPurchasable"				"1"
-	}
-	"item_recipe_demonic_nike"
-	{
-		"ItemPurchasable"				"1"
-	}
-	"item_demonic_nike"
-	{
-		"ItemPurchasable"				"1"
-	}
-	"item_recipe_subzero_mask"
-	{
-		"ItemPurchasable"				"1"
-	}
-	"item_subzero_mask"
-	{
-		"ItemPurchasable"				"1"
-	}
-	"item_recipe_skadi_datadriven"
-	{
-		"ItemPurchasable"				"1"
-	}
-	"item_skadi_datadriven"
-	{
-		"ItemPurchasable"				"1"
-	}
-	
-	
+
 }

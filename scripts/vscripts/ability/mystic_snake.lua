@@ -1,3 +1,6 @@
+--[[Author: Pizzalol
+	Date: 07.03.2015.
+	Initializes all the needed starting values for the Mystic Snake]]
 function MysticSnakeInitialize( keys )
 	local caster = keys.caster
 	local target = keys.target
@@ -8,9 +11,9 @@ function MysticSnakeInitialize( keys )
 	local base_mana = (target:GetMana()*0.35)
 	
 		if caster:HasScepter() then
-           base_mana = (target:GetMaxMana()* 0.5 )
-		   base_damage = ability:GetLevelSpecialValueFor("snake_damage_scepter", ability_level) 
-		end
+           base_mana = (target:GetMaxMana()*0.5)
+		   base_damage = 350
+    end
 
 
 
@@ -48,8 +51,6 @@ function MysticSnake( keys )
 	local mystic_snake_projectile = keys.mystic_snake_projectile
 	local particle_impact_enemy = keys.particle_impact_enemy
 	local particle_impact_friendly = keys.particle_impact_friendly
-
-	if target:TriggerSpellAbsorb( ability ) then return end
 	
 		
 

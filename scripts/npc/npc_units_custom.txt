@@ -594,13 +594,13 @@
 	{										
 		// General
 		//----------------------------------------------------------------
-		"Model"						"models/props_gameplay/donkey.vmdl"	// Model.
-		"BaseClass"					"npc_dota_lone_druid_bear"
+		"Model"						"models/courier/frog/frog.vmdl"	// Model.
+		"BaseClass"					"npc_dota_beastmaster_boar"
 		"SoundSet"					"Beastmaster_Boar"			// Name of sound set.
 		"Level"						"5"
-		"ModelScale"				"0.65"
+		"ModelScale"				"10"
 		"IsSummoned"				"1"
-		"UnitLabel"					"osel"
+		"UnitLabel"					"boar"
 
 		// Abilities
 		//----------------------------------------------------------------
@@ -657,350 +657,8 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-	}	
+	}		
 
-	// Legacy
-	"npc_dota_beastmaster_greater_boar"
-	{										
-		// General
-		//----------------------------------------------------------------
-		"Model"						"models/props_gameplay/donkey.vmdl"	// Model.
-		"BaseClass"					"npc_dota_lone_druid_bear"
-		"SoundSet"					"Beastmaster_Boar"			// Name of sound set.
-		"Level"						"5"
-		"ModelScale"				"2"
-		"IsSummoned"				"1"
-		"UnitLabel"					"osel"
-
-		// Abilities
-		//----------------------------------------------------------------
-		"Ability1"					"beastmaster_greater_boar_poison"			// Ability 1
-		"Ability2"					""			// Ability 2
-		"Ability3"					""			// Ability 3
-		"Ability4"					""			// Ability 4
-
-		// Armor
-		//----------------------------------------------------------------
-		"ArmorPhysical"				"0"			// Physical protection.
-
-		// Attack
-		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"43"		// Damage range min.
-		"AttackDamageMax"			"49"		// Damage range max.	
-		"AttackRate"				"1.0"		// Speed of attack.
-		"AttackAnimationPoint"		"0.633"		// Normalized time in animation cycle to attack.
-		"AttackAcquisitionRange"	"600"		// Range within a target can be acquired.
-		"AttackRange"				"550"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/units/heroes/hero_beastmaster/beastmaster_boar_attack.vpcf"	// Particle system model for projectile.
-		"ProjectileSpeed"			"1500"		// Speed of projectile.		   
-
-		// Bounds
-		//----------------------------------------------------------------
-		"HealthBarOffset"			"125"
-
-		// Bounty
-		//----------------------------------------------------------------
-		"BountyXP"					"59"		// Experience earn.
-		"BountyGoldMin"				"26"		// Gold earned min.
-		"BountyGoldMax"				"38"		// Gold earned max.
-
-		// Movement
-		//----------------------------------------------------------------
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"350"		// Speed.
-		"MovementTurnRate"			"0.6"		// Turning rate.
-
-		// Status
-		//----------------------------------------------------------------
-		"StatusHealth"				"500"		// Base health.
-		"StatusHealthRegen"			"1.5"		// Health regeneration rate.
-		
-		// Vision
-		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"1400"		// Range of vision during day light.
-		"VisionNighttimeRange"		"800"		// Range of vision at night time.
-
-		// Team
-		//----------------------------------------------------------------
-		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
-		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
-		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-	}	
-
-	"npc_dota_shrek_osel1"
-	{										
-		// General
-		//----------------------------------------------------------------
-		"Model"						"models/props_gameplay/donkey.vmdl"	// Model.
-		"BaseClass"					"npc_dota_lone_druid_bear"
-		"SoundSet"					"Beastmaster_Boar"			// Name of sound set.
-		"Level"						"1"
-		"ModelScale"				"1.3"
-		"IsSummoned"				"1"
-		"UnitLabel"					"osel"
-		"HasInventory"				"0"
-
-		// Abilities
-		//----------------------------------------------------------------
-		"Ability1"					"shrek_osel_doebatsa"			// Ability 1
-		"Ability2"					"shrek_osel_zaebal"			// Ability 2
-		"Ability3"					"shrek_osel_zamedlo"			// Ability 3
-		"Ability4"					"lone_druid_spirit_bear_return"			// Ability 4
-
-		// Armor
-		//----------------------------------------------------------------
-		"ArmorPhysical"				"10"			// Physical protection.
-
-		// Attack
-		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin"			"0"		// Damage range min.
-		"AttackDamageMax"			"0"		// Damage range max.	
-		"AttackRate"				"100"		// Speed of attack.
-		"AttackAnimationPoint"		"100"		// Normalized time in animation cycle to attack.
-		"AttackAcquisitionRange"	"0"		// Range within a target can be acquired.
-		"AttackRange"				"150"		// Range within a target can be attacked.	   
-
-		// Bounds
-		//----------------------------------------------------------------
-		"HealthBarOffset"			"125"
-
-		// Bounty
-		//----------------------------------------------------------------
-		"BountyXP"					"100"		// Experience earn.
-		"BountyGoldMin"				"100"		// Gold earned min.
-		"BountyGoldMax"				"100"		// Gold earned max.
-
-		// Movement
-		//----------------------------------------------------------------
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"350"		// Speed.
-		"MovementTurnRate"			"0.6"		// Turning rate.
-
-		// Status
-		//----------------------------------------------------------------
-		"StatusHealth"				"1500"		// Base health.
-		"StatusHealthRegen"			"15"		// Health regeneration rate.
-		
-		// Vision
-		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"1400"		// Range of vision during day light.
-		"VisionNighttimeRange"		"800"		// Range of vision at night time.
-
-		// Team
-		//----------------------------------------------------------------
-		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
-		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_HERO"
-		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-	}	
-
-	"npc_dota_shrek_osel2"
-	{										
-		// General
-		//----------------------------------------------------------------
-		"Model"						"models/props_gameplay/donkey.vmdl"	// Model.
-		"BaseClass"					"npc_dota_lone_druid_bear"
-		"SoundSet"					"Beastmaster_Boar"			// Name of sound set.
-		"Level"						"1"
-		"ModelScale"				"1.3"
-		"IsSummoned"				"1"
-		"UnitLabel"					"osel"
-		"HasInventory"				"0"
-
-		// Abilities
-		//----------------------------------------------------------------
-		"Ability1"					"shrek_osel_doebatsa"			// Ability 1
-		"Ability2"					"shrek_osel_zaebal"			// Ability 2
-		"Ability3"					"shrek_osel_zamedlo"			// Ability 3
-		"Ability4"					"lone_druid_spirit_bear_return"			// Ability 4
-
-		// Armor
-		//----------------------------------------------------------------
-		"ArmorPhysical"				"15"			// Physical protection.
-
-		// Attack
-		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin"			"0"		// Damage range min.
-		"AttackDamageMax"			"0"		// Damage range max.	
-		"AttackRate"				"100"		// Speed of attack.
-		"AttackAnimationPoint"		"100"		// Normalized time in animation cycle to attack.
-		"AttackAcquisitionRange"	"0"		// Range within a target can be acquired.
-		"AttackRange"				"150"		// Range within a target can be attacked.	   
-
-		// Bounds
-		//----------------------------------------------------------------
-		"HealthBarOffset"			"125"
-
-		// Bounty
-		//----------------------------------------------------------------
-		"BountyXP"					"150"		// Experience earn.
-		"BountyGoldMin"				"150"		// Gold earned min.
-		"BountyGoldMax"				"150"		// Gold earned max.
-
-		// Movement
-		//----------------------------------------------------------------
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"360"		// Speed.
-		"MovementTurnRate"			"0.6"		// Turning rate.
-
-		// Status
-		//----------------------------------------------------------------
-		"StatusHealth"				"2500"		// Base health.
-		"StatusHealthRegen"			"25"		// Health regeneration rate.
-		
-		// Vision
-		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"1400"		// Range of vision during day light.
-		"VisionNighttimeRange"		"800"		// Range of vision at night time.
-
-		// Team
-		//----------------------------------------------------------------
-		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
-		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_HERO"
-		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-	}	
-
-	"npc_dota_shrek_osel3"
-	{										
-		// General
-		//----------------------------------------------------------------
-		"Model"						"models/props_gameplay/donkey.vmdl"	// Model.
-		"BaseClass"					"npc_dota_lone_druid_bear"
-		"SoundSet"					"Beastmaster_Boar"			// Name of sound set.
-		"Level"						"1"
-		"ModelScale"				"1.3"
-		"IsSummoned"				"1"
-		"UnitLabel"					"osel"
-		"HasInventory"				"0"
-
-		// Abilities
-		//----------------------------------------------------------------
-		"Ability1"					"shrek_osel_doebatsa"			// Ability 1
-		"Ability2"					"shrek_osel_zaebal"			// Ability 2
-		"Ability3"					"shrek_osel_zamedlo"			// Ability 3
-		"Ability4"					"lone_druid_spirit_bear_return"			// Ability 4
-
-		// Armor
-		//----------------------------------------------------------------
-		"ArmorPhysical"				"20"			// Physical protection.
-
-		// Attack
-		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin"			"0"		// Damage range min.
-		"AttackDamageMax"			"0"		// Damage range max.	
-		"AttackRate"				"100"		// Speed of attack.
-		"AttackAnimationPoint"		"100"		// Normalized time in animation cycle to attack.
-		"AttackAcquisitionRange"	"0"		// Range within a target can be acquired.
-		"AttackRange"				"150"		// Range within a target can be attacked.	   
-
-		// Bounds
-		//----------------------------------------------------------------
-		"HealthBarOffset"			"125"
-
-		// Bounty
-		//----------------------------------------------------------------
-		"BountyXP"					"200"		// Experience earn.
-		"BountyGoldMin"				"200"		// Gold earned min.
-		"BountyGoldMax"				"200"		// Gold earned max.
-
-		// Movement
-		//----------------------------------------------------------------
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"370"		// Speed.
-		"MovementTurnRate"			"0.6"		// Turning rate.
-
-		// Status
-		//----------------------------------------------------------------
-		"StatusHealth"				"3500"		// Base health.
-		"StatusHealthRegen"			"35"		// Health regeneration rate.
-		
-		// Vision
-		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"1400"		// Range of vision during day light.
-		"VisionNighttimeRange"		"800"		// Range of vision at night time.
-
-		// Team
-		//----------------------------------------------------------------
-		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
-		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_HERO"
-		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-	}	
-
-	"npc_dota_shrek_osel4"
-	{										
-		// General
-		//----------------------------------------------------------------
-		"Model"						"models/props_gameplay/donkey.vmdl"	// Model.
-		"BaseClass"					"npc_dota_lone_druid_bear"
-		"SoundSet"					"Beastmaster_Boar"			// Name of sound set.
-		"Level"						"1"
-		"ModelScale"				"1.3"
-		"IsSummoned"				"1"
-		"UnitLabel"					"osel"
-		"HasInventory"				"0"
-
-		// Abilities
-		//----------------------------------------------------------------
-		"Ability1"					"shrek_osel_doebatsa"			// Ability 1
-		"Ability2"					"shrek_osel_zaebal"			// Ability 2
-		"Ability3"					"shrek_osel_zamedlo"			// Ability 3
-		"Ability4"					"lone_druid_spirit_bear_return"			// Ability 4
-
-		// Armor
-		//----------------------------------------------------------------
-		"ArmorPhysical"				"25"			// Physical protection.
-
-		// Attack
-		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin"			"0"		// Damage range min.
-		"AttackDamageMax"			"0"		// Damage range max.	
-		"AttackRate"				"100"		// Speed of attack.
-		"AttackAnimationPoint"		"100"		// Normalized time in animation cycle to attack.
-		"AttackAcquisitionRange"	"0"		// Range within a target can be acquired.
-		"AttackRange"				"150"		// Range within a target can be attacked.   
-
-		// Bounds
-		//----------------------------------------------------------------
-		"HealthBarOffset"			"125"
-
-		// Bounty
-		//----------------------------------------------------------------
-		"BountyXP"					"250"		// Experience earn.
-		"BountyGoldMin"				"250"		// Gold earned min.
-		"BountyGoldMax"				"250"		// Gold earned max.
-
-		// Movement
-		//----------------------------------------------------------------
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"380"		// Speed.
-		"MovementTurnRate"			"0.6"		// Turning rate.
-
-		// Status
-		//----------------------------------------------------------------
-		"StatusHealth"				"4500"		// Base health.
-		"StatusHealthRegen"			"45"		// Health regeneration rate.
-		
-		// Vision
-		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"1400"		// Range of vision during day light.
-		"VisionNighttimeRange"		"800"		// Range of vision at night time.
-
-		// Team
-		//----------------------------------------------------------------
-		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
-		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_HERO"
-		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-	}			
-// Жаба наруто
 	"npc_dota_lone_druid_bear1"
 	{										
 		// General
@@ -1027,9 +685,9 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"80"		// Damage range min.
-		"AttackDamageMax"			"80"		// Damage range max.	
-		"AttackRate"				"1.25"		// Speed of attack.
+		"AttackDamageMin"			"60"		// Damage range min.
+		"AttackDamageMax"			"60"		// Damage range max.	
+		"AttackRate"				"1.00"		// Speed of attack.
 		"AttackAnimationPoint"		"0.35"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"600"		// Range within a target can be acquired.
 		"AttackRange"				"600"		// Range within a target can be attacked.
@@ -1050,7 +708,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"350"		// Speed.
+		"MovementSpeed"				"340"		// Speed.
 		"MovementTurnRate"			"0.6"		// Turning rate.
 
 		// Status
@@ -1102,9 +760,9 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"110"		// Damage range min.
-		"AttackDamageMax"			"110"		// Damage range max.	
-		"AttackRate"				"1.25"		// Speed of attack.
+		"AttackDamageMin"			"90"		// Damage range min.
+		"AttackDamageMax"			"90"		// Damage range max.	
+		"AttackRate"				"0.85"		// Speed of attack.
 		"AttackAnimationPoint"		"0.35"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"600"		// Range within a target can be acquired.
 		"AttackRange"				"625"		// Range within a target can be attacked.
@@ -1125,7 +783,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"355"		// Speed.
+		"MovementSpeed"				"345"		// Speed.
 		"MovementTurnRate"			"0.6"		// Turning rate.
 
 		// Status
@@ -1178,9 +836,9 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"140"		// Damage range min.
-		"AttackDamageMax"			"140"		// Damage range max.	
-		"AttackRate"				"1.25"		// Speed of attack.
+		"AttackDamageMin"			"120"		// Damage range min.
+		"AttackDamageMax"			"120"		// Damage range max.	
+		"AttackRate"				"0.50"		// Speed of attack.
 		"AttackAnimationPoint"		"0.35"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"600"		// Range within a target can be acquired.
 		"AttackRange"				"650"		// Range within a target can be attacked.
@@ -1201,7 +859,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"360"		// Speed.
+		"MovementSpeed"				"350"		// Speed.
 		"MovementTurnRate"			"0.6"		// Turning rate.
 
 		// Status
@@ -1253,8 +911,8 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"170"		// Damage range min.
-		"AttackDamageMax"			"170"		// Damage range max.	
+		"AttackDamageMin"			"150"		// Damage range min.
+		"AttackDamageMax"			"150"		// Damage range max.	
 		"AttackRate"				"1.25"		// Speed of attack.
 		"AttackAnimationPoint"		"0.35"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"600"		// Range within a target can be acquired.
@@ -1276,7 +934,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"365"		// Speed.
+		"MovementSpeed"				"355"		// Speed.
 		"MovementTurnRate"			"0.6"		// Turning rate.
 
 		// Status
@@ -1299,6 +957,93 @@
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
 		//Inventory
-		"HasInventory"				"1"	
+		"HasInventory"				"1"
+		
 	}
+	"dota_fountain"
+	{
+		// General
+		//
+		"BaseClass"					"ent_dota_fountain"	// Class of entity of link to.
+		"Model"						"models/props_structures/dire_fountain002.vmdl"	// Model.
+		"SoundSet"					"dota_fountain"					// Name of sound set.
+		"MinimapIcon"				"minimap_ward_obs"
+		"MinimapIconSize"				"1"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		
+		"Ability1"					""			// Ability 1.
+		"Ability2"					""			// Ability 2.
+		"Ability3"					""			// Ability 3.
+		"Ability4"					""			// Ability 4.
+		"Ability5"					""			// Ability 5.
+		"Ability6"					""			// Ability 6 - Extra.
+		"Ability7"					""			// Ability 7 - Extra.
+		"Ability8"					""			// Ability 8 - Extra.
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"0"			// Physical protection.
+		"MagicalResistance"				"0"			// Magical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
+		"AttackDamageMin"			"290"		// Damage range min.
+		"AttackDamageMax"			"310"		// Damage range max.
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"0.15"		// Speed of attack.
+		"AttackAnimationPoint"		"0.0"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"1200"		// Range within a target can be acquired.
+		"AttackRange"				"1200"		// Range within a target can be attacked. (was 690)
+		"ProjectileModel"			"particles/base_attacks/fountain_attack.vpcf" // Particle system model for projectile.
+		"ProjectileSpeed"			"1400"		// Speed of projectile.
+
+		// Attributes
+		//----------------------------------------------------------------
+		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"0"			// Base strength
+		"AttributeStrengthGain"		"0"			// Strength bonus per level.
+		"AttributeBaseIntelligence"	"0"			// Base intelligence
+		"AttributeIntelligenceGain"	"0"			// Intelligence bonus per level.
+		"AttributeBaseAgility"		"0"			// Base agility
+		"AttributeAgilityGain"		"0"			// Agility bonus per level.
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"0"		// Experience earn.
+		"BountyGoldMin"				"0"		// Gold earned min.
+		"BountyGoldMax"				"0"		// Gold earned max.
+
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_TOWER"			// Hull type used for navigation/locomotion.
+		"RingRadius"				"220"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"			// Type of locomotion - ground, air
+		"MovementSpeed"				"0"			// Speed
+		"MovementTurnRate"			"0"			// Turning rate.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"500"		// Base health.
+		"StatusHealthRegen"			"0"			// Health regeneration rate.
+		"StatusMana"				"0"			// Base mana.
+		"StatusManaRegen"			"0"			// Mana regeneration rate.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_SIEGE"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"		// Range of vision during day light.
+		"VisionNighttimeRange"		"1800"		// Range of vision at night time.
+	}		
 }	
